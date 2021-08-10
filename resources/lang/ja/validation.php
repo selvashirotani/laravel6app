@@ -44,7 +44,7 @@ return [
     'distinct' => 'The :attribute field has a duplicate value.',
     'email' => ' :attribute を正しい形式で入力してください。',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
-    'exists' => 'The selected :attribute is invalid.',
+    'exists' => ' :attribute を正しく入力してください。',
     'file' => 'The :attribute must be a file.',
     'filled' => 'The :attribute field must have a value.',
     'gt' => [
@@ -124,6 +124,7 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    'alpha_num_half' =>  ':attribute は半角英数字で入力してください', //追記
 
     /*
     |--------------------------------------------------------------------------
