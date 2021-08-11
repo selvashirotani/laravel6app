@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 
 use Illuminate\Http\Request; // この追加必要！
 use Illuminate\Support\Facades\Password; // この追加必要！
-use App\Rules\AlphaNumHalf;//追記
 
 class ResetPasswordController extends Controller
 {
@@ -24,20 +23,6 @@ class ResetPasswordController extends Controller
     */
 
     use ResetsPasswords;
- 
-    /**
-     * Get the password reset validation rules.
-     *
-     * @return array
-     */
-    protected function rules()
-    {
-        return [
-            'token' => 'required',
-            'email' => 'required|email',
-            "password" => ['required',new AlphaNumHalf,'max:20','min:8'],
-        ];
-    }
     
 
     /**
