@@ -32,3 +32,16 @@ Route::get('/form/thanks', "SampleFormController@complete")->name("form.complete
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// item 表示
+Route::get('/item', "ItemFormController@show")->name("item.show");
+
+// item 遷移先
+Route::post('/item', "ItemFormController@post")->name("item.post");
+
+// item 確認画面
+Route::get('/item/confirm', "ItemFormController@confirm")->name("item.confirm");
+// item 確認画面からフォーム遷移先
+Route::post('/item/confirm', "ItemFormController@send")->name("item.send");
+
+Route::get('/', "ItemFormController@complete")->name("item.complete");

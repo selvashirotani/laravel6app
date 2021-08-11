@@ -26,7 +26,7 @@ return [
     'before' => 'The :attribute must be a date before :date.',
     'before_or_equal' => 'The :attribute must be a date before or equal to :date.',
     'between' => [
-        'numeric' => 'The :attribute must be between :min and :max.',
+        'numeric' => ' :attribute を正しく入力してください。',
         'file' => 'The :attribute must be between :min and :max kilobytes.',
         'string' => 'The :attribute must be between :min and :max characters.',
         'array' => 'The :attribute must have between :min and :max items.',
@@ -162,6 +162,11 @@ return [
         'password' => 'パスワード',
         'password_confirmation' => '確認用パスワード',
         'email' => 'メールアドレス',
+        'name' => '商品名',
+        'product_category_id' => 'カテゴリ',
+        'product_subcategory_id' => 'サブカテゴリ',
+        'imege_1' => '画像',
+        'product_content' => '商品説明'
     ],
 
 ];

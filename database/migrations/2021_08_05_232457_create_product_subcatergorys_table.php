@@ -20,6 +20,10 @@ class CreateProductSubcatergorysTable extends Migration
                 $table->string('name',255)->nullable(false)->comment('サブカテゴリ名');
                 $table->timestamps();
                 $table->softDeletes();
+                $table->foreign('product_category_id')
+                    ->references('id')
+                    ->on('product_categorys')
+                    ->onDelete('cascade');
             });
         }
     }
