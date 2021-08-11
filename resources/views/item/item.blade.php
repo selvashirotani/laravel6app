@@ -8,30 +8,34 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Laravel</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-       <script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script >
             // セレクトボックスの連動
             // 親カテゴリのselect要素が変更になるとイベントが発生
+
             $(document).on('change', '#category', function() {
                 var cate_val = $(this).val();
-                product_subcategory_id.disabled = false;
+                subcategory.disabled = false;
                 $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 url: '/fetch/category',
                 type: 'POST',
-                data: {'category_val' : cate_val},
+                data: {
+                    "product_category_id" : cate_val
+                },
                 datatype: 'json',
                 })
-                .done(function(data) {
-                // 子カテゴリのoptionを一旦削除
-                $('#subcategory option').remove();
-                // DBから受け取ったデータを子カテゴリのoptionにセット
-                $.each(data, function(key, value) {
-                    $('#subcategory').append($('<option>').text(value.name).attr('value', key));
+                .done(function(data) {    
+                    // DBから受け取ったデータを子カテゴリのoptionにセット
+                    $('#subcategory').append($('<option>').text("選択してください"));
+                    $.each(data, function(key, value) {
+                        $('#subcategory').append($('<option>').text(value.subcategory_name).attr('value', value.id));
+                    })
+
                 })
-                })
+
                 .fail(function() {
                 console.log('失敗');
                 }); 
@@ -70,7 +74,7 @@
 
                     <div class="element_wrap">
                         <label for="category">商品カテゴリ</label>
-                        <select name = "product_category_id" id="category" >
+                        <select name = "category" id="category">
                         <!-- onchange=”createCategory(this.value)” 選択をする度にJavaScriptのcreateCategoryという関数を呼び出し -->
                         <!-- また関数を呼び出す際に選択した値を「this.value」にて渡しています -->
                             <option name="product_category_id" value="" selected>選択してください</option>
@@ -82,16 +86,9 @@
                             @endif
                             @endforeach
                         </select>
-
-                        <select name = "product_subcategory_id" id="subcategory" >
-                            <option name="product_subcategory_id" value="" selected>選択してください</option>
-                            @foreach ($subcategory as $index => $name)
-                            @if((!empty($request->product_subcategory_id) && $request->product_subcategory_id == $index) || old('product_subcategory_id') == $index )
-                            <option value="{{$index}}" name="product_subcategory_id" data-val="" selected>{{$name}}</option>
-                            @else
-                            <option value="{{$index}}" name="product_subcategory_id" data-val="" >{{$name}}</option>
-                            @endif
-                            @endforeach
+                        
+                        <select name = "subcategory" id="subcategory" disabled>
+                            
                         </select>
 
 
@@ -115,7 +112,7 @@
                         <textarea class='wide-text' name="product_content" value="{{ old('product_content') }}" >{{ old('product_content') }}</textarea>
                     </div>
 
-                    <input type="submit" name="btn_confirm" value="確認画面へ" />
+                    <input type="submit" id="submit" name="btn_confirm" value="確認画面へ" />
                     <a class="back-btn" href="{{ url('/') }}">トップに戻る</a>
                 </form>
 

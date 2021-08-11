@@ -96,9 +96,6 @@ class ItemFormController extends Controller
         $product_subcategorys = DB::select('select * from product_subcatergorys');
 
         return view("item.item_confirm",compact(
-            // "input" => $input,
-            // 'product_categorys' => $product_categorys,
-            // 'product_subcategorys' => $product_subcategorys,
             'input','product_categorys','product_subcategorys'
         ));
     }
