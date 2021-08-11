@@ -13,17 +13,18 @@ class CreateProductSubcatergorysTable extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('product_subcatergorys')){
-            Schema::create('product_subcatergorys', function (Blueprint $table) {
-                $table->bigIncrements('id')->comment('サブカテゴリID');
-                $table->integer('product_category_id')->nullable(false)->comment('カテゴリID');
-                $table->string('name',255)->nullable(false)->comment('サブカテゴリ名');
+        if(!Schema::hasTable('product_subcategories')){
+            Schema::create('product_subcategories', function (Blueprint $table) {
+                $table->increments('id')->comment('サブカテゴリID');
+                $table->integer('parent_category_id')->unsigned()->nullable(false)->comment('親カテゴリID');
+                $table->string('subcategory_name',255)->nullable(false)->comment('サブカテゴリ名');
                 $table->timestamps();
                 $table->softDeletes();
-                $table->foreign('product_category_id')
+
+                // 親カテゴリーIDは、必ずproduct_categoriesに存在する事！
+                $table->foreign('parent_category_id')
                     ->references('id')
-                    ->on('product_categorys')
-                    ->onDelete('cascade');
+                    ->on('product_categories');
             });
         }
     }
@@ -35,6 +36,6 @@ class CreateProductSubcatergorysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_subcatergorys');
+        Schema::dropIfExists('product_subcategories');
     }
 }

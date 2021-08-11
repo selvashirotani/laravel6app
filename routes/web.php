@@ -45,3 +45,6 @@ Route::get('/item/confirm', "ItemFormController@confirm")->name("item.confirm");
 Route::post('/item/confirm', "ItemFormController@send")->name("item.send");
 
 Route::get('/', "ItemFormController@complete")->name("item.complete");
+
+//セレクトボックス用
+Route::post('/fetch/category', 'PostController@fetch')->name('post.fetch');

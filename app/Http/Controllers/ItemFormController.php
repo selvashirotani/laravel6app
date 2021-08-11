@@ -33,11 +33,13 @@ class ItemFormController extends Controller
         //return view("item.item");
 
         //カテゴリ(追加)
-        $product_categorys = Categories::pluck('name','id');
-        $product_subcategorys = SubCategories::pluck('name','id');
+        $category = Categories::pluck('category_name','id');
+        $subcategory = SubCategories::pluck('subcategory_name','id');
         return view('item.item',compact(
-            'product_categorys','product_subcategorys'
+            'category','subcategory'
         ));
+
+
     }
 
     function post(Request $request){

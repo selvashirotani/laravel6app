@@ -13,10 +13,10 @@ class CreateProductCategorysTable extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('product_categorys')){
-            Schema::create('product_categorys', function (Blueprint $table) {
-                $table->bigIncrements('id')->comment('カテゴリID');
-                $table->string('name',255)->nullable(false)->comment('カテゴリ名');
+        if(!Schema::hasTable('product_categories')){
+            Schema::create('product_categories', function (Blueprint $table) {
+                $table->increments('id')->comment('カテゴリID');
+                $table->string('category_name',255)->nullable(false)->comment('カテゴリ名');
                 $table->timestamps();
                 $table->softDeletes();
             });
@@ -30,6 +30,6 @@ class CreateProductCategorysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_categorys');
+        Schema::dropIfExists('product_categories');
     }
 }
