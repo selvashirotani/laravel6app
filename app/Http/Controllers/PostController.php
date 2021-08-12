@@ -13,8 +13,13 @@ class PostController extends Controller
      * ajaxリクエストを受け取り、サブカテゴリを返す
      */
     public function fetch(Request $request) {
-        $cateVal = $request['product_category_id'];
-        $subCategory = SubCategories::where('parent_category_id', $cateVal)->get();
+        $product_category_id = $request['product_category_id'];
+        $product_sub_category_id = $request['product_sub_category_id'];
+        $subCategory = SubCategories::where('parent_category_id', $product_category_id)->get();
+        // return view("item.item",compact(
+        //     'subCategory ','product_category_id','product_subcategorys'
+        // ))
+        // ;
         return $subCategory;
     }
 

@@ -9,40 +9,6 @@
         <title>Laravel</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script >
-            // セレクトボックスの連動
-            // 親カテゴリのselect要素が変更になるとイベントが発生
-
-            $(document).on('change', '#category', function() {
-                var cate_val = $(this).val();
-                subcategory.disabled = false;
-                $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: '/fetch/category',
-                type: 'POST',
-                data: {
-                    "product_category_id" : cate_val
-                },
-                datatype: 'json',
-                })
-                .done(function(data) {    
-                    // DBから受け取ったデータを子カテゴリのoptionにセット
-                    $('#subcategory').append($('<option>').text("選択してください"));
-                    $.each(data, function(key, value) {
-                        $('#subcategory').append($('<option>').text(value.subcategory_name).attr('value', value.id));
-                    })
-
-                })
-
-                .fail(function() {
-                console.log('失敗');
-                }); 
-
-            });
-
-       </script>
 
     </head>
 
@@ -91,6 +57,45 @@
                             
                         </select>
 
+                        <script >
+                            // セレクトボックスの連動
+                            // 親カテゴリのselect要素が変更になるとイベントが発生
+
+                            $(document).on('change', '#category', function() {
+                                var cate_val = $(this).val();
+                                subcategory.disabled = false;
+                                $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                url: '/fetch/category',
+                                type: 'POST',
+                                data: {
+                                    "product_category_id" : cate_val,
+                                },
+                                datatype: 'json',
+                                })
+                                .done(function(data) {  
+                                    $('#subcategory option').remove();
+                                    // DBから受け取ったデータを子カテゴリのoptionにセット
+                                    $('#subcategory').append($('<option>').text("選択してください"));
+                                    $.each(data, function(key, value) {
+                                        $('#subcategory').append($('<option>').text(value.subcategory_name).attr('value', value.id));
+                                    })
+                                })
+                                .fail(function() {
+                                console.log('失敗');
+                                }); 
+                                
+                            });
+
+                            $(document).on('change', '#subcategory', function() {
+                                var product_sub_category_id = $(this).val();
+                                console.log(product_sub_category_id);
+                            })
+
+                        </script>
+
 
                     </div>
 
@@ -120,4 +125,38 @@
         
        
     </body>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function(){
+
+        const xhr = new XMLHttpRequest();
+        const fd = new FormData();
+
+        // (1) 送信先を指定
+        xhr.open('post', '/item/confirm');
+
+        // (2) フォームに入力されたデータを取得
+        const name = document.querySelector('input[name=name]');
+        const product_category_id = document.querySelector('select[name=category]');
+        const product_subcategory_id = document.querySelector('select[name=subcategory]');
+        const product_content = document.querySelector('textarea[name=product_content]');
+
+        // (3) FormDataオブジェクトにデータをセット
+        fd.append('name', name.value);
+        fd.append('product_category_id',product_category_id.value);
+        fd.append('product_subcategory_id', product_subcategory_id.value);
+        fd.append('product_content', product_content.value);
+
+        // (4) FormDataオブジェクトと一緒にリクエスト（要求）を送信
+        xhr.send(fd);
+
+        // (5) 通信が完了したらレスポンスをコンソールに出力する
+        xhr.addEventListener('readystatechange', () => {
+
+            if( xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.response);
+            }
+        });
+        });
+    </script>
 </html>

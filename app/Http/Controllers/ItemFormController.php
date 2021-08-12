@@ -34,9 +34,8 @@ class ItemFormController extends Controller
 
         //カテゴリ(追加)
         $category = Categories::pluck('category_name','id');
-        $subcategory = SubCategories::pluck('subcategory_name','id');
         return view('item.item',compact(
-            'category','subcategory'
+            'category'
         ));
 
 
@@ -44,7 +43,8 @@ class ItemFormController extends Controller
 
     function post(Request $request){
 
-        $input = $request->only($this->formItems);
+        $input = $request->all();
+        //$input = $request->only($this->formItems);
 
         $validator = Validator::make($input, $this->validator);
 		if($validator->fails()){
