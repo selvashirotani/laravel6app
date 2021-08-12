@@ -11,9 +11,11 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     </head>
-
+    
     <body>
+
         <div class="main">
+       
             <h1>商品登録</h1>
             
                 @if($errors->any())
@@ -40,59 +42,72 @@
 
                     <div class="element_wrap">
                         <label for="category">商品カテゴリ</label>
-                        <select name = "category" id="category">
+                        <select name = "product_category_id" id="category">
                         <!-- onchange=”createCategory(this.value)” 選択をする度にJavaScriptのcreateCategoryという関数を呼び出し -->
                         <!-- また関数を呼び出す際に選択した値を「this.value」にて渡しています -->
-                            <option name="product_category_id" value="" selected>選択してください</option>
+                            <option value="">選択してください</option>
                             @foreach ($category as $index => $name)
                             @if((!empty($request->product_category_id) && $request->product_category_id == $index) || old('product_category_id') == $index )
-                            <option value="{{$index}}" name="product_category_id" selected>{{$name}}</option>
+                            <option value="{{$index}}" selected>{{$name}}</option>
                             @else
-                            <option value="{{$index}}" name="product_category_id">{{$name}}</option>
+                            <option value="{{$index}}" >{{$name}}</option>
                             @endif
                             @endforeach
                         </select>
                         
-                        <select name = "subcategory" id="subcategory" disabled>
-                            
+                        <select name = "product_subcategory_id" id="subcategory" disabled>
+                            <option value="">選択してください</option>
+                            @foreach ($subcategory as $index => $name)
+                            @if((!empty($request->product_subcategory_id) && $request->product_subcategory_id == $index) || old('product_subcategory_id') == $index )
+                            <option value="{{$index}}" selected>{{$name}}</option>
+                            @else
+                            <option value="{{$index}}" >{{$name}}</option>
+                            @endif
+                            @endforeach
                         </select>
 
                         <script >
                             // セレクトボックスの連動
                             // 親カテゴリのselect要素が変更になるとイベントが発生
-
-                            $(document).on('change', '#category', function() {
-                                var cate_val = $(this).val();
-                                subcategory.disabled = false;
-                                $.ajax({
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                },
-                                url: '/fetch/category',
-                                type: 'POST',
-                                data: {
-                                    "product_category_id" : cate_val,
-                                },
-                                datatype: 'json',
-                                })
-                                .done(function(data) {  
-                                    $('#subcategory option').remove();
-                                    // DBから受け取ったデータを子カテゴリのoptionにセット
-                                    $('#subcategory').append($('<option>').text("選択してください"));
-                                    $.each(data, function(key, value) {
-                                        $('#subcategory').append($('<option>').text(value.subcategory_name).attr('value', value.id));
+                            jQuery(function(){
+                                function some_handler(){
+                                    //実行したい内容をここに書く
+                                    var cate_val = $(this).val();
+                                    subcategory.disabled = false;
+                                    $.ajax({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    url: '/fetch/category',
+                                    type: 'POST',
+                                    data: {
+                                        "product_category_id" : cate_val,
+                                    },
+                                    datatype: 'json',
                                     })
-                                })
-                                .fail(function() {
-                                console.log('失敗');
-                                }); 
-                                
+                                    .done(function(data) {  
+                                            // 有効の場合
+                                            $.each(data, function(key, value) {  
+                                                $('#subcategory option[value="'+value.id+'"]').toggle();
+                                            })                                       
+                                        
+                                    })
+                                    .fail(function() {
+                                    console.log('失敗');
+                                    }); 
+                                }
+
+                                //どちらのイベントでも同じ関数が実行される
+                                $("#category").change(some_handler);
+                                $("#category").focus(some_handler);
                             });
 
+
                             $(document).on('change', '#subcategory', function() {
-                                var product_sub_category_id = $(this).val();
+                                var product_subcategory_id = $(this).val();
                                 console.log(product_sub_category_id);
                             })
+
 
                         </script>
 
@@ -123,40 +138,7 @@
 
         </div>
         
-       
     </body>
 
-    <script>
-        window.addEventListener('DOMContentLoaded', function(){
-
-        const xhr = new XMLHttpRequest();
-        const fd = new FormData();
-
-        // (1) 送信先を指定
-        xhr.open('post', '/item/confirm');
-
-        // (2) フォームに入力されたデータを取得
-        const name = document.querySelector('input[name=name]');
-        const product_category_id = document.querySelector('select[name=category]');
-        const product_subcategory_id = document.querySelector('select[name=subcategory]');
-        const product_content = document.querySelector('textarea[name=product_content]');
-
-        // (3) FormDataオブジェクトにデータをセット
-        fd.append('name', name.value);
-        fd.append('product_category_id',product_category_id.value);
-        fd.append('product_subcategory_id', product_subcategory_id.value);
-        fd.append('product_content', product_content.value);
-
-        // (4) FormDataオブジェクトと一緒にリクエスト（要求）を送信
-        xhr.send(fd);
-
-        // (5) 通信が完了したらレスポンスをコンソールに出力する
-        xhr.addEventListener('readystatechange', () => {
-
-            if( xhr.readyState === 4 && xhr.status === 200) {
-                console.log(xhr.response);
-            }
-        });
-        });
-    </script>
+    
 </html>

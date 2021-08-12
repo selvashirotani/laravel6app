@@ -34,7 +34,7 @@ Auth::routes(['register' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 // item 表示
-Route::get('/item', "ItemFormController@show")->name("item.show");
+Route::get('/item', "ItemFormController@show")->name("item.show")->middleware('auth');;
 
 // item 遷移先
 Route::post('/item', "ItemFormController@post")->name("item.post");
