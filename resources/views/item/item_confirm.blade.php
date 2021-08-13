@@ -88,22 +88,36 @@
 
 		<div class="element_wrap">
 			<label>商品写真</label>
-			<!-- @if(!empty($input['imege_1']))
-            <p>写真1</p>
-			<img src="/storage/{{ $input['imege_1'] }}" style="width:100%;"/>
+            
+			@if(!empty($path_image_1))
+			<p>写真1</p></br>
+			<label></label>
+			<img src="/storage/{{$path_image_1}}" style="width:200px;height:200px;"/>
 			@endif
-			@if(!empty($input['imege_2']))
-            <p>写真2</p>
-			<img src="/storage/{{ $input['imege_2'] }}" style="width:100%;"/>
+
+			@if(!empty($path_image_2))
+			</br>
+			<label></label>
+			<p>写真2</p></br>
+			<label></label>
+			<img src="/storage/{{$path_image_2}}" style="width:200px;height:200px;"/>
 			@endif
-			@if(!empty($input['imege_3']))
-            <p>写真3</p>
-			<img src="/storage/{{ $input['imege_3'] }}" style="width:100%;"/>
+
+			@if(!empty($path_image_3))
+			</br>
+			<label></label>
+			<p>写真3</p></br>
+			<label></label>
+			<img src="/storage/{{$path_image_3}}" style="width:200px;height:200px;"/>
 			@endif
-			@if(!empty($input['imege_4']))
-            <p>写真4</p>
-			<img src="/storage/{{ $input['imege_4'] }}" style="width:100%;"/>
-			@endif -->
+
+			@if(!empty($path_image_4))
+			</br>
+			<label></label>
+			<p>写真4</p></br>
+			<label></label>
+			<img src="/storage/{{$path_image_4}}" style="width:200px;height:200px;"/>
+			@endif
 			
 		</div>
 

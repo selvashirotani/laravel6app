@@ -48,3 +48,5 @@ Route::get('/', "ItemFormController@complete")->name("item.complete");
 
 //セレクトボックス用
 Route::post('/fetch/category', 'PostController@fetch')->name('post.fetch');
+//セレクトボックス用
+Route::post('/fetch/image', 'PostController@image')->name('post.image');

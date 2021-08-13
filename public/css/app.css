@@ -56,7 +56,12 @@ button[name=btn_submit]{
 	background: #f8a041;
 }
 
-button[name=btn_back]{
+button[name=btn_back],
+button[name=imege_1],
+button[name=imege_2],
+button[name=imege_3],
+button[name=imege_4]
+{
 	margin-top: 10px;
 	padding: 5px 20px;
 	font-size: 100%;
@@ -136,3 +141,13 @@ button[name=btn_back]{
     background: #f2f2f2;
     margin: 0.5em 0;
 }
+
+/* 画像送信 */
+input[type=file] {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0;
+	height: 0;
+	opacity: 0;
+  }
