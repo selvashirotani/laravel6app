@@ -14,7 +14,13 @@
 
 .item_name{
 	position:absolute;
-	top:120px;
+	top:90px;
+	left:400px;
+}
+
+.item_review{
+	position:absolute;
+	top:140px;
 	left:400px;
 }
 
@@ -101,4 +107,9 @@ input[name=btn_search]
 	line-height   : 1em;         /* 1行の高さ  */
 	transition    : .3s;         /* なめらか変化 */
 	text-decoration: none;
+}
+
+.item_name a{
+	text-decoration: none;
+    color: black;
 }

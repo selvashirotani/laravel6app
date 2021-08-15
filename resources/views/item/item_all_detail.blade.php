@@ -119,13 +119,28 @@
 
         <p>■ 商品説明</p>
         <p>{{$item->product_content}}</p>
-            
+        </br>
+        <p>■ 商品レビュー</p>
+        <p>総合評価</p>
+
+        <p class="item_review"><a class="" href="">>>レビューを見る</a></p>
+
     </div>
+
+        @guest
+
+        @else
+            <a class="review-btn" href="/item/all/detail/review?number={{$item->id}}">この商品についてのレビューを登録</a>
+        @endguest
+            
+    
     
     @endforeach
 
 
 @endif
+
+
 
 <?php
     if(!empty($_SERVER['HTTP_REFERER'])){

@@ -1,0 +1,17 @@
+.review-btn{
+	display       : inline-block;
+	border-radius: 3px;
+	font-size: 100%;
+	text-align    : center;      /* 文字位置   */
+	cursor        : pointer;     /* カーソル   */
+	padding: 9px 20px;
+	background: #f8a041;
+	color: #ffffff;
+	line-height   : 1em;         /* 1行の高さ  */
+	border:medium solid #f8a041;
+	text-decoration: none;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 20px;
+
+}

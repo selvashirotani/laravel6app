@@ -166,7 +166,9 @@ return [
         'product_category_id' => 'カテゴリ',
         'product_subcategory_id' => 'サブカテゴリ',
         'imege_1' => '画像',
-        'product_content' => '商品説明'
+        'product_content' => '商品説明',
+        'evaluation' => '商品評価',
+        'comment' => '商品説明'
     ],
 
 ];

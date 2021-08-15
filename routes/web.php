@@ -55,3 +55,17 @@ Route::get('/item/all', "ItemAllController@show")->name("itemall.show");
 
 // item 詳細表示
 Route::get('/item/all/detail', "ItemAllController@detail")->name("itemall.detail");
+
+// item レビュー表示
+Route::get('/item/all/detail/review', "ItemAllController@review")->name("itemall.review")->middleware('auth');
+
+// item レビュー遷移先
+Route::post('/item/all/detail/review', "ItemAllController@post")->name("itemall.post");
+
+// item レビュー確認画面
+Route::get('/item/all/detail/review/confirm', "ItemAllController@confirm")->name("itemall.confirm");
+
+// item レビュー確認画面からフォーム遷移先
+Route::post('/item/all/detail/review/confirm', "ItemAllController@send")->name("itemall.send");
+// item レビュー 完了画面
+Route::get('/item/all/detail/review/thanks', "ItemAllController@complete")->name("itemall.complete");

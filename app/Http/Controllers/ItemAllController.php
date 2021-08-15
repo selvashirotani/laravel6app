@@ -7,11 +7,29 @@ use Illuminate\Http\Request;
 use App\Models\items; //モデルクラス呼び出し
 use App\Models\Categories; //モデルクラス呼び出し
 use App\Models\SubCategories; //モデルクラス呼び出し
+use App\Models\reviews;
 
 use Illuminate\Pagination\Paginator;
 
+use Validator; //バリデーションを使うから必要
+use App\Models\members; //モデルクラス呼び出し
+use Illuminate\Support\Facades\DB; //DBクラス
+use Auth;
+
+
+
+
 class ItemAllController extends Controller
 {
+
+    //バリデーション
+    private $formItems = ["evaluation","comment"];
+    private $validator = [
+        "evaluation" => "required|in:1,2,3,4,5",
+        "comment" => "required|string|max:500",    
+    ];
+
+
     function show(Request $request){
 
         //カテゴリ(追加)
@@ -71,15 +89,109 @@ class ItemAllController extends Controller
         ));
     }
 
-    public function detail(Request $request)
-    {
+    public function detail(Request $request){
         $number = $request->number;
         $query = items::query();
         $query->where('id',$number);
         $items = $query->get();
 
         return view('item.item_all_detail',compact(
-            'items'
+            'items','number'
         ));
     }
+
+    public function review(Request $request){
+        if(!empty($input["product_id"])){
+            $number = $input["product_id"];
+        }else{
+            $number = $request->number;
+        }
+        $query = items::query();
+        $query->where('id',$number);
+        $items = $query->get();
+
+        return view('item.item_all_detail_review',compact(
+            'items','number'
+        ));
+    }
+
+    public function post(Request $request){
+
+        $input = $request->only("product_id","evaluation","comment");
+        $query = items::query();
+        $query->where('id',$input["product_id"]);
+        $items = $query->get();
+
+        $validator = Validator::make($input, $this->validator);
+		if($validator->fails()){
+			return back()
+				->withInput()
+				->withErrors($validator);
+		}
+        $request->session()->put("item_input", $input);
+        return redirect()->action("ItemAllController@confirm");
+    }
+
+    public function confirm(Request $request){
+        //セッションから値を取り出す
+        $input = $request->session()->get("item_input");
+
+        $query = items::query();
+        $query->where('id',$input["product_id"]);
+        $items = $query->get();
+        
+        $replacements1 = array('comment' =>nl2br($input['comment']));
+        $replacements2 = array('evaluation' => (int)$input['evaluation']);
+        $input = array_replace($input,$replacements1,$replacements2);
+
+        //セッションに値が無い時はフォームに戻る
+		if(!$input){
+			return redirect()->action("ItemAllController@review");
+		}
+
+        return view("item.item_review_confirm",compact(
+            'input','items'
+        ));
+    }
+
+    public function send(Request $request){
+        //セッションから値を取り出す
+        $input = $request->session()->get("item_input");
+
+        //セッションに値が無い時はフォームに戻る
+		if(!$input){
+			return redirect()->action("ItemAllController@review");
+		}
+
+        reviews::all();
+
+        \DB::beginTransaction();
+        try{
+            $review = new reviews;
+            $review->member_id = Auth::user()->id;
+            $review->product_id = $input["evaluation"]; //DBからとりだす。
+            $review->evaluation = $input["evaluation"];
+            $review->comment = $input["comment"];
+            
+            $review->save();
+            \DB::commit();
+        }catch(\Throwable $e){
+            \DB::rollback();
+            abort(500); //500エラーを表示する。
+        }
+
+        // 二重送信対策(2021080415:51)
+        $request->session()->regenerateToken();
+
+        //セッションを空にする
+		$request->session()->forget("item_input");
+
+        return redirect()->action("ItemAllController@complete");
+
+    }
+
+    public function complete(Request $request){
+        return view("item.item_review_complete");
+    }
+
 }

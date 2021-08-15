@@ -161,7 +161,8 @@
 			本・雑誌 > ライフスタイル
 			@endif
         </p>
-        <p class="item_name">{{$item->name}}</p>
+        <p class="item_name"><a class="detail-name" href="/item/all/detail?number={{$item->id}}">{{$item->name}}</a></p>
+        <p class="item_review">総合評価</p>
         <p class="item_id"><a class="detail-button" href="/item/all/detail?number={{$item->id}}">詳細</a></p>
 
             
