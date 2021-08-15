@@ -256,13 +256,8 @@ class ItemFormController extends Controller
         $request->session()->forget("image_input_3");
         $request->session()->forget("image_input_4");
 
-        return redirect()->action("ItemFormController@complete");
+        return redirect()->action("ItemAllController@show");
 
     }
-
-    //完了画面
-    function complete(){	
-		return view("welcome");
-	}
     
 }

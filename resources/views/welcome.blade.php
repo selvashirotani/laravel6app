@@ -7,6 +7,7 @@
     @guest
 
         <div class = "right-column">
+            <a class="headerbutton" href="{{ url('/item/all') }}">商品一覧</a>
         @if (Route::has('form.send'))
             <a class="headerbutton" href="{{ url('/form') }}">新規会員登録</a>
         @endif
@@ -23,6 +24,7 @@
             </div>
 
             <div class = "right-column">
+            <a class="headerbutton" href="{{ url('/item/all') }}">商品一覧</a>
             <a class="headerbutton" href="{{ url('/item') }}">新規商品登録</a>
             <a class="headerbutton" href="{{ route('logout') }}"
                 onclick="event.preventDefault();

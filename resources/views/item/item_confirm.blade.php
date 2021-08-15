@@ -92,7 +92,7 @@
 			@if(!empty($path_image_1))
 			<p>写真1</p></br>
 			<label></label>
-			<img src="/storage/{{$path_image_1}}" style="width:200px;height:200px;"/>
+			<img src="/storage/{{$path_image_1}}" style="width:auto;height:200px;"/>
 			@endif
 
 			@if(!empty($path_image_2))
@@ -100,7 +100,7 @@
 			<label></label>
 			<p>写真2</p></br>
 			<label></label>
-			<img src="/storage/{{$path_image_2}}" style="width:200px;height:200px;"/>
+			<img src="/storage/{{$path_image_2}}" style="width:auto;height:200px;"/>
 			@endif
 
 			@if(!empty($path_image_3))
@@ -108,7 +108,7 @@
 			<label></label>
 			<p>写真3</p></br>
 			<label></label>
-			<img src="/storage/{{$path_image_3}}" style="width:200px;height:200px;"/>
+			<img src="/storage/{{$path_image_3}}" style="width:auto;height:200px;"/>
 			@endif
 
 			@if(!empty($path_image_4))
@@ -116,7 +116,7 @@
 			<label></label>
 			<p>写真4</p></br>
 			<label></label>
-			<img src="/storage/{{$path_image_4}}" style="width:200px;height:200px;"/>
+			<img src="/storage/{{$path_image_4}}" style="width:auto;height:200px;"/>
 			@endif
 			
 		</div>
