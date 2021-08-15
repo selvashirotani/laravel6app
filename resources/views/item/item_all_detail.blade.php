@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Laravel</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/item_all.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/item_detail.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- こちら参考に二重送信対策(2021080416:11)
     https://javascript.programmer-reference.com/js-prevention-twice-submit/ -->
@@ -32,82 +32,21 @@
 
 <div class="header">
             
-    @guest
+    <div class = "left-column">
+            <p> 商品詳細</p>
+    </div>
 
-        <div class = "left-column">
-             <p> 商品一覧</p>
-        </div>
-
-
-        
-    @else
-        <div class = "left-column">
-             <p> 商品一覧</p>
-        </div>
-
-        <div class = "right-column">
-            <a class="headerbutton" href="{{ url('/item') }}">新規商品登録</a>
-        </div>
-    @endguest
+    <div class = "right-column">
+        <a class="headerbutton" href="{{ url('/') }}">トップに戻る</a>
+    </div>
 
 </div class="header">
 
-
 <div class="main">
-<!-- 検索フォーム -->
-    <div class="search">
-        <form action="{{ route('itemall.show') }}">
-        @csrf
-        <div class="element_wrap">
-            <label for="category">カテゴリ</label>
-            <select name = "product_category_id" id="category">
-            <!-- onchange=”createCategory(this.value)” 選択をする度にJavaScriptのcreateCategoryという関数を呼び出し -->
-            <!-- また関数を呼び出す際に選択した値を「this.value」にて渡しています -->
-                <option value="" >カテゴリ</option>
-                @foreach ($category as $index => $name)
-                @if((!empty($request->product_category_id) && $request->product_category_id == $index) || old('product_category_id') == $index )
-                <option value="{{$index}}" selected>{{$name}}</option>
-                @else
-                <option value="{{$index}}" >{{$name}}</option>
-                @endif
-                @endforeach
-            </select>
-            
-            <select name = "product_subcategory_id" id="subcategory">
-                <option id="not_select" value="">サブカテゴリ</option>
-                @foreach ($subcategory as $index => $name)
-                @if((!empty($request->product_subcategory_id) && $request->product_subcategory_id == $index) || old('product_subcategory_id') == $index )
-                <option value="{{$index}}" selected>{{$name}}</option>
-                @else
-                <option value="{{$index}}" >{{$name}}</option>
-                @endif
-                @endforeach
-            </select>
-
-
-            <!-- JavaScripts -->
-            <script src="{{ asset('js/category.js') }}"></script>
-        </div>
-
-
-        <div class="element_wrap">
-            <label for="free_word">フリー ワード</label>
-            <input type="text" name="free_word" value="{{ old('free_word') }}" />
-        </div>
-
-        <input type="submit" id="submit" name="btn_search" value="商品検索" />
-        </form>
-
-    </div>
-<!-- 検索フォーム -->
-
 <!-- 一覧ここから -->
 @if(!empty($items))
     @foreach ($items as $item)
     <div class="items">
-        @if(!empty($item->imege_1))
-        <img class="img_right" src="/storage/{{$item->imege_1}}" style="width:auto;height:200px;"/>
-        @endif
         <p class="item_cate">
 			@if($item->product_subcategory_id == "1")
 			インテリア > 収納家具
@@ -161,22 +100,46 @@
 			本・雑誌 > ライフスタイル
 			@endif
         </p>
-        <p class="item_name">{{$item->name}}</p>
-        <p class="item_id"><a class="detail-button" href="/item/all/detail?number={{$item->id}}">詳細</a></p>
+        <p class="item_name">{{$item->name}}　　　更新日時；{{$item->updated_at->format('Ymd')}}</p>
+        @if(!empty($item->imege_1))
+        <img class="img_right" src="/storage/{{$item->imege_1}}" style="width:auto;height:200px;"/>
+        @endif
 
+        @if(!empty($item->imege_2))
+        <img class="img_right" src="/storage/{{$item->imege_2}}" style="width:auto;height:200px;"/>
+        @endif
+
+        @if(!empty($item->imege_3))
+        <img class="img_right" src="/storage/{{$item->imege_3}}" style="width:auto;height:200px;"/>
+        @endif
+
+        @if(!empty($item->imege_4))
+        <img class="img_right" src="/storage/{{$item->imege_4}}" style="width:auto;height:200px;"/>
+        @endif
+
+        <p>■ 商品説明</p>
+        <p>{{$item->product_content}}</p>
             
     </div>
     
     @endforeach
 
-    {{ $items->appends(request()->input())->links('vendor.pagination.sample-pagination') }}
 
 @endif
 
+<?php
+    if(!empty($_SERVER['HTTP_REFERER'])){
+        $prev_url = parse_url($_SERVER['HTTP_REFERER']);
+    }
+    
+?>
 
-<a class="back-btn" href="{{ url('/') }}">トップに戻る</a>
-
+@if(!empty($prev_url["query"]))
+    <a class="back-btn" href="{{ $prev_url["path"]}}?{{$prev_url["query"]}}">商品一覧に戻る</a>
+@else
+    <a class="back-btn" href="{{ url('/item/all') }}">商品一覧に戻る</a>
+@endif
 </div>
-        
+
 </body>
 </html>

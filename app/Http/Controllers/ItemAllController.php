@@ -64,15 +64,22 @@ class ItemAllController extends Controller
 
 
         //1ページにつき10件ずつ表示
-        $items = $query->orderBy('id', 'desc')->paginate(3);
+        $items = $query->orderBy('id', 'desc')->paginate(10);
        
-
-
-
-
-
         return view('item.item_all',compact(
             'items','category','subcategory'
+        ));
+    }
+
+    public function detail(Request $request)
+    {
+        $number = $request->number;
+        $query = items::query();
+        $query->where('id',$number);
+        $items = $query->get();
+
+        return view('item.item_all_detail',compact(
+            'items'
         ));
     }
 }

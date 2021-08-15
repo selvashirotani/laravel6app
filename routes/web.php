@@ -52,3 +52,6 @@ Route::post('/fetch/image', 'PostController@image')->name('post.image');
 
 // item 一覧表示
 Route::get('/item/all', "ItemAllController@show")->name("itemall.show");
+
+// item 詳細表示
+Route::get('/item/all/detail', "ItemAllController@detail")->name("itemall.detail");
