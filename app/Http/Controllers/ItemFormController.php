@@ -58,7 +58,7 @@ class ItemFormController extends Controller
             ));
         }else{
             return view("item.item",compact(
-                'category','subcategory',
+                'category','subcategory'
             ));
         }
 
