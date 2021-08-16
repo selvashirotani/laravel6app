@@ -15,6 +15,7 @@ $(function(){
 
         $('#imege_1').change(function(e){ //ファイルの画像変わったら（アップロードされたら）
             $('button[name=imege_2]').removeAttr('style');
+            $('#imege_1_2').attr('style', 'display: none;');
         //ファイルオブジェクトを取得する
         var file = e.target.files[0]; ///選択ファイルを配列形式で取得
         var file_size = e.target.files[0].size;
@@ -60,6 +61,7 @@ $(function(){
         $('#imege_2').change(function(e){ //ファイルの画像変わったら（アップロードされたら）
             $('button[name=imege_2]').removeAttr('style');
             $('button[name=imege_3]').removeAttr('style');
+            $('#imege_2_2').attr('style', 'display: none;');
         //ファイルオブジェクトを取得する
         var file = e.target.files[0]; ///選択ファイルを配列形式で取得
         var file_size = e.target.files[0].size;
@@ -103,6 +105,7 @@ $(function(){
             $('button[name=imege_2]').removeAttr('style');
             $('button[name=imege_3]').removeAttr('style');
             $('button[name=imege_4]').removeAttr('style');
+            $('#imege_3_2').attr('style', 'display: none;');
         //ファイルオブジェクトを取得する
         var file = e.target.files[0]; ///選択ファイルを配列形式で取得
         var file_size = e.target.files[0].size;
@@ -147,6 +150,7 @@ $(function(){
         $('button[name=imege_3]').removeAttr('style');
         $('button[name=imege_4]').removeAttr('style');
         $('#imege_4').change(function(e){ //ファイルの画像変わったら（アップロードされたら）
+            $('#imege_4_2').attr('style', 'display: none;');
         //ファイルオブジェクトを取得する
         var file = e.target.files[0]; ///選択ファイルを配列形式で取得
         var file_size = e.target.files[0].size;

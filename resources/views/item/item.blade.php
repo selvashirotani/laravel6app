@@ -225,8 +225,8 @@
                     <label for="image">商品写真</label>
                     <label>写真1</label>
                     <img id="imege_1_up" style="width:auto;height:200px;" />
-                    @if(isset($path_image_1))
-                    <img src="/storage/{{$path_image_1}}" style="width:auto;height:200px;"/>
+                    @if(!empty($path_image_1))
+                    <img id="imege_1_2" src="/storage/{{$path_image_1}}" style="width:auto;height:200px;"/>
                     @endif
                     <input type="file" id="imege_1" name="imege_1">
                     <button type="button" name="imege_1">アップロード</button>
@@ -236,7 +236,7 @@
                     <label>写真2</label>
                     <img id="imege_2_up" style="width:auto;height:200px;" />
                     @if(!empty($path_image_2))
-                    <img src="/storage/{{$path_image_2}}" style="width:auto;height:200px;"/>
+                    <img id="imege_2_2" src="/storage/{{$path_image_2}}" style="width:auto;height:200px;"/>
                     @endif
                     <input type="file" id="imege_2" name="imege_2">
                     <button type="button" name="imege_2">アップロード</button>
@@ -246,6 +246,9 @@
                     <label for="image"></label>
                     <label>写真3</label>
                     <img id="imege_3_up" style="width:auto;height:200px;" />
+                    @if(!empty($path_image_3))
+                    <img id="imege_3_2" src="/storage/{{$path_image_3}}" style="width:auto;height:200px;"/>
+                    @endif
                     <input type="file" id="imege_3" name="imege_3">
                     <button type="button" name="imege_3">アップロード</button>
 
@@ -254,6 +257,9 @@
                     <label for="image"></label>
                     <label>写真4</label>
                     <img id="imege_4_up" style="width:auto;height:200px;" />
+                    @if(!empty($path_image_4))
+                    <img id="imege_4_2" src="/storage/{{$path_image_4}}" style="width:auto;height:200px;"/>
+                    @endif
                     <input type="file" id="imege_4" name="imege_4">
                     <button type="button" name="imege_4">アップロード</button>
 

@@ -31,9 +31,37 @@ class ItemFormController extends Controller
         //カテゴリ(追加)
         $category = Categories::pluck('category_name','id');
         $subcategory = SubCategories::pluck('subcategory_name','id');
-        return view('item.item',compact(
-            'category','subcategory'
-        ));
+
+        $path_image_1 = $request->session()->get("image_input_1");
+        $path_image_2 = $request->session()->get("image_input_2");
+        $path_image_3 = $request->session()->get("image_input_3");
+        $path_image_4 = $request->session()->get("image_input_4");
+
+        if($path_image_4 ){
+            return view("item.item",compact(
+                'category','subcategory','path_image_1','path_image_2','path_image_3','path_image_4'
+            ));
+        }
+        elseif($path_image_3 ){
+            return view("item.item",compact(
+                'category','subcategory','path_image_1','path_image_2','path_image_3'
+            ));
+        }
+        elseif($path_image_2 ){
+            return view("item.item",compact(
+                'category','subcategory','path_image_1','path_image_2'
+            ));
+        }
+        elseif($path_image_1 ){
+            return view("item.item",compact(
+                'category','subcategory','path_image_1'
+            ));
+        }else{
+            return view("item.item",compact(
+                'category','subcategory',
+            ));
+        }
+
 
 
     }
