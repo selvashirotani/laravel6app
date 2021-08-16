@@ -121,9 +121,21 @@
         <p>{{$item->product_content}}</p>
         </br>
         <p>■ 商品レビュー</p>
-        <p>総合評価</p>
+        @if(0 < $evaluation && $evaluation <= 1)
+        <p class="item_review">総合評価　★　　　　　1</p>
+        @elseif(1 < $evaluation && $evaluation <= 2)
+        <p class="item_review">総合評価　★★　　　　2</p>
+        @elseif(2 < $evaluation && $evaluation <= 3)
+        <p class="item_review">総合評価　★★★　　　3</p>
+        @elseif(3 < $evaluation && $evaluation<= 4)
+        <p class="item_review">総合評価　★★★★　　4</p>
+        @elseif(4 < $evaluation && $evaluation<= 5)
+        <p class="item_review">総合評価　★★★★★　5</p>
+        @else
+        <p class="item_review">レビューなし</p>
+        @endif
 
-        <p class="item_review"><a class="" href="">>>レビューを見る</a></p>
+        <p class="item_review"><a class="" href="/item/all/detail/review_show?number={{$item->id}}">>>レビューを見る</a></p>
 
     </div>
 
@@ -150,7 +162,7 @@
 ?>
 
 @if(!empty($prev_url["query"]))
-    <a class="back-btn" href="{{ $prev_url["path"]}}?{{$prev_url["query"]}}">商品一覧に戻る</a>
+    <a class="back-btn" href="/item/all?{{$prev_url["query"]}}">商品一覧に戻る</a>
 @else
     <a class="back-btn" href="{{ url('/item/all') }}">商品一覧に戻る</a>
 @endif

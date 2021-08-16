@@ -63,7 +63,19 @@
 
         <p class="item_name">{{$item->name}}</p>
         
-        <p class="item_review">総合評価</p>
+        @if(0 < $evaluation && $evaluation <= 1)
+        <p class="item_review">総合評価　★　　　　　1</p>
+        @elseif(1 < $evaluation && $evaluation <= 2)
+        <p class="item_review">総合評価　★★　　　　2</p>
+        @elseif(2 < $evaluation && $evaluation <= 3)
+        <p class="item_review">総合評価　★★★　　　3</p>
+        @elseif(3 < $evaluation && $evaluation<= 4)
+        <p class="item_review">総合評価　★★★★　　4</p>
+        @elseif(4 < $evaluation && $evaluation<= 5)
+        <p class="item_review">総合評価　★★★★★　5</p>
+        @else
+        <p class="item_review">レビューなし</p>
+        @endif
 
     </div>
 

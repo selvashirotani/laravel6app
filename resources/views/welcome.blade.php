@@ -26,6 +26,7 @@
             <div class = "right-column">
             <a class="headerbutton" href="{{ url('/item/all') }}">商品一覧</a>
             <a class="headerbutton" href="{{ url('/item') }}">新規商品登録</a>
+            <a class="headerbutton" href="{{ url('/member/detail') }}">マイページ</a>
             <a class="headerbutton" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">

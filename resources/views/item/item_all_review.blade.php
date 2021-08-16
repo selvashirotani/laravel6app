@@ -9,6 +9,7 @@
     <title>Laravel</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/item_all.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/review.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- こちら参考に二重送信対策(2021080416:11)
     https://javascript.programmer-reference.com/js-prevention-twice-submit/ -->
@@ -33,7 +34,7 @@
 <div class="header">
             
     <div class = "left-column">
-            <p> 商品レビュー登録</p>
+            <p> 商品レビュー一覧</p>
     </div>
 
     <div class = "right-column">
@@ -43,6 +44,7 @@
 </div>
 
 <div class="main">
+
 <!-- 一覧ここから -->
 @if(!empty($items))
     @foreach ($items as $item)
@@ -53,8 +55,8 @@
         @endif
 
         <p class="item_name">{{$item->name}}</p>
-        
-        @if(0 < $evaluation && $evaluation == 1)
+       
+        @if(0 < $evaluation && $evaluation <= 1)
         <p class="item_review">総合評価　★　　　　　1</p>
         @elseif(1 < $evaluation && $evaluation <= 2)
         <p class="item_review">総合評価　★★　　　　2</p>
@@ -67,29 +69,46 @@
         @else
         <p class="item_review">レビューなし</p>
         @endif
-
+        
     </div>
 
     @endforeach
 
 @endif
 
+@if(!empty($reviews))
+    @foreach ($reviews as $review)
+    <div class="reviews">
+
+        <p class="review_user">{{$review->nickname}}さん</p>
+
+        @if($review->evaluation == "1")
+        <p class="review_evaluation">★　　　　　1</p>
+        @elseif($review->evaluation == "2")
+        <p class="review_evaluation">★★　　　　2</p>
+        @elseif($review->evaluation == "3")
+        <p class="review_evaluation">★★★　　　3</p>
+        @elseif($review->evaluation == "4")
+        <p class="review_evaluation">★★★★　　4</p>
+        @elseif($review->evaluation == "5")
+        <p class="review_evaluation">★★★★★　5</p>
+        @endif
 
 
-<form method="post" action="{{ route('itemall.send') }}" onsubmit="return checkNijyuSubmit();">
-	@csrf
-		<div class="element_wrap">
-			<label>商品名</label>
-			<p>{{ $input["evaluation"] }}</p>
-		</div>
-        <div class="element_wrap">
-			<label>商品コメント</label>
-			<p>{!! nl2br($input["comment"]) !!}</p>
-			
-		</div>
-    <button type="button" name="btn_back" onclick=history.back()>前に戻る</button>
-    <input type="submit" name="btn_submit" id="btnSubmit" value="登録する">
-</form>
+        <p class="p_comment">商品コメント</p>
+        <p class="review_comment">{{$review->comment}}</p>
+
+    </div>
+
+    @endforeach
+
+    {{ $reviews->appends(request()->input())->links('vendor.pagination.sample-pagination') }}
+
+@endif
+
+
+
+
 
 <?php
     if(!empty($_SERVER['HTTP_REFERER'])){

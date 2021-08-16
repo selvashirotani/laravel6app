@@ -69,3 +69,10 @@ Route::get('/item/all/detail/review/confirm', "ItemAllController@confirm")->name
 Route::post('/item/all/detail/review/confirm', "ItemAllController@send")->name("itemall.send");
 // item レビュー 完了画面
 Route::get('/item/all/detail/review/thanks', "ItemAllController@complete")->name("itemall.complete");
+
+// item レビューすべて
+Route::get('/item/all/detail/review_show', "ItemAllController@reviewall")->name("itemall.reviewall");
+
+
+// マイページ詳細
+Route::get('/member/detail', "MemberController@show")->name("member.show");

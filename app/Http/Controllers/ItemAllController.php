@@ -79,13 +79,19 @@ class ItemAllController extends Controller
                         ->orWhere('product_content','like','%'.$free_word.'%');
             }
         }
-
+ 
 
         //1ページにつき10件ずつ表示
         $items = $query->orderBy('id', 'desc')->paginate(10);
+
+        foreach($items as $item){
+            $evaluation = items::where('products.id',$item->id)
+            ->join('reviews','products.id','=','reviews.product_id')
+            ->avg('reviews.evaluation');
+        }
        
         return view('item.item_all',compact(
-            'items','category','subcategory'
+            'items','category','subcategory','evaluation'
         ));
     }
 
@@ -95,8 +101,12 @@ class ItemAllController extends Controller
         $query->where('id',$number);
         $items = $query->get();
 
+        $evaluation = items::where('products.id',$number)
+                    ->join('reviews','products.id','=','reviews.product_id')
+                    ->avg('reviews.evaluation');
+
         return view('item.item_all_detail',compact(
-            'items','number'
+            'items','number','evaluation'
         ));
     }
 
@@ -110,8 +120,12 @@ class ItemAllController extends Controller
         $query->where('id',$number);
         $items = $query->get();
 
+        $evaluation = items::where('products.id',$number)
+                    ->join('reviews','products.id','=','reviews.product_id')
+                    ->avg('reviews.evaluation');
+
         return view('item.item_all_detail_review',compact(
-            'items','number'
+            'items','number','evaluation'
         ));
     }
 
@@ -144,13 +158,17 @@ class ItemAllController extends Controller
         $replacements2 = array('evaluation' => (int)$input['evaluation']);
         $input = array_replace($input,$replacements1,$replacements2);
 
+        $evaluation = items::where('products.id',$input["product_id"])
+                    ->join('reviews','products.id','=','reviews.product_id')
+                    ->avg('reviews.evaluation');
+
         //セッションに値が無い時はフォームに戻る
 		if(!$input){
 			return redirect()->action("ItemAllController@review");
 		}
 
         return view("item.item_review_confirm",compact(
-            'input','items'
+            'input','items','evaluation'
         ));
     }
 
@@ -169,7 +187,7 @@ class ItemAllController extends Controller
         try{
             $review = new reviews;
             $review->member_id = Auth::user()->id;
-            $review->product_id = $input["evaluation"]; //DBからとりだす。
+            $review->product_id = $input["product_id"]; //DBからとりだす。
             $review->evaluation = $input["evaluation"];
             $review->comment = $input["comment"];
             
@@ -183,15 +201,47 @@ class ItemAllController extends Controller
         // 二重送信対策(2021080415:51)
         $request->session()->regenerateToken();
 
-        //セッションを空にする
-		$request->session()->forget("item_input");
-
-        return redirect()->action("ItemAllController@complete");
+        return redirect()->action("ItemAllController@complete")
+                        ->withInput();
 
     }
 
     public function complete(Request $request){
-        return view("item.item_review_complete");
+        $input = $request->session()->get("item_input");
+
+        return view("item.item_review_complete",compact(
+            'input'
+        ));
+
+        //セッションを空にする
+		$request->session()->forget("item_input");
+
     }
 
+    public function reviewall(Request $request){
+
+        $number = $request->number;
+
+        // $query = items::query();
+        // $query->where('id',$number);
+        // $items = $query->get();
+        $items = items::where('id',$number)
+                    ->get();
+
+        $evaluation = items::where('products.id',$number)
+                    ->join('reviews','products.id','=','reviews.product_id')
+                    ->avg('reviews.evaluation');
+
+        $comment = reviews::query();
+        $comment->where('product_id',$number)
+                    ->join('users','reviews.member_id','=','users.id');
+
+
+        //1ページにつき5件ずつ表示
+        $reviews = $comment->orderBy('reviews.id', 'desc')->paginate(5);
+
+        return view("item.item_all_review",compact(
+            'items','number','reviews','evaluation'
+        ));
+    }
 }
