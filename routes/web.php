@@ -75,4 +75,4 @@ Route::get('/item/all/detail/review_show', "ItemAllController@reviewall")->name(
 
 
 // マイページ詳細
-Route::get('/member/detail', "MemberController@show")->name("member.show");
+Route::get('/member/detail', "MemberController@show")->name("member.show")->middleware('auth');
