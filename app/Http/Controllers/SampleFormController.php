@@ -33,37 +33,12 @@ class SampleFormController extends Controller //この行、元から
 
     private $formItems = ["password_confirmation","name_sei", "name_mei", "nickname","gender","password","email"];
 
-	// private $validator = [
-	// 	"name_sei" => "required|string|max:20",
-    //     "name_mei" => "required|string|max:20",
-    //     "nickname" => "required|string|max:10",
-	// 	"gender" => "required|in:1,2",
-	// 	//2021080309:18 性別のとこでエラー
-	// 	"password" => "required|string|max:20|min:8",
-	// 	//パスワード確認 https://www.kaasan.info/archives/3719
-	// 	"password_confirmation" => "same:password",
-    //     "email" => "required|email:rfc,dns|max:200|unique:App\Models\members,email",
-    //     // "email" => "必須か|メール形式か|max:200|DB登録済じゃないか"
-    //     //データベース内に存在しないかバリデート
-    //     //参照 https://readouble.com/laravel/8.x/ja/validation.html#rule-unique
-    //     //テーブル名は、App\Models\Member.php 内で指定。
-    //     //データベース作ってないからエラーになる可能性大(2021080223:33)
-	// 	//案の定エラー
-	// 	//"email" => "required|email:rfc,dns|max:200|unique:App\Models\Member,email"
-	// ];
-
     //フォームの表示
 
 	function show(){
 		return view("form.form");
         //show()関数は問い合わせフォームを表示
 	}
-
-	// 2021080322:36 master.php関連
-	// public function add() {
-    //     $genders = config('master');
-    //     return view('form.form', compact('gender'));
-    // }
 
 	function post(Request $request){
 		

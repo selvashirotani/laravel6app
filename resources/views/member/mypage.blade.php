@@ -42,17 +42,20 @@
         <p>女性</p>
         @endif
     </div>
+    <a class="submit-btn" href="/member/detail/change?id={{ Auth::user()->id}}">会員情報変更</a>
 
     <div class="element_wrap">
         <label>パスワード</label>
         <p>セキュリティのため非表示</p>
     </div>
+    <a class="submit-btn" href="{{route('member.change_pass_confirm')}}">パスワード変更</a>
 
     <div class="element_wrap">
         <label>メールアドレス</label>
         <p>{{ Auth::user()->email}}</p>
     </div>
-
+    <a class="submit-btn" href="/member/detail/change_email?id={{ Auth::user()->id}}">メールアドレス変更</a>
+    </br>
     <a class="back-btn" href="/member/detail/delete?id={{ Auth::user()->id}}">退会</a>
 
 

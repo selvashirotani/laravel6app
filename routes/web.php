@@ -80,3 +80,21 @@ Route::get('/member/detail', "MemberController@all")->name("member.all")->middle
 //退会画面
 Route::get('/member/detail/delete','MemberController@delete_confirm')->name('member.delete_confirm'); //警告画面に飛ばしたいため追記
 Route::post('/member/detail/delete','MemberController@destroy')->name("member.destroy"); //destroyを追記
+
+//会員情報変更
+Route::get('/member/detail/change','MemberController@show')->name('member.show');
+Route::post('/member/detail/change','MemberController@change')->name("member.change");
+Route::get('/member/detail/change/confirm','MemberController@confirm')->name('member.confirm');
+Route::post('/member/detail/change/confirm','MemberController@send')->name("member.send");
+
+//パスワード変更
+Route::get('/member/detail/change_pass','MemberController@change_pass_confirm')->name('member.change_pass_confirm');
+Route::post('/member/detail/change_pass','MemberController@change_pass')->name("member.change_pass");
+
+//メールアドレス変更
+Route::get('/member/detail/change_email','MemberController@change_email_confirm')->name('member.change_email_confirm');
+Route::post('/member/detail/change_email','MemberController@change_email')->name("member.change_email");
+
+//メールアドレス変更の認証
+Route::get('/member/detail/auth_email','MemberController@auth_email_show')->name('member.auth_email_show');
+Route::post('/member/detail/auth_email','MemberController@auth_email')->name("member.auth_email");
