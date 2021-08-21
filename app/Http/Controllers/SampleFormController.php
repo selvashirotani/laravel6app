@@ -80,7 +80,7 @@ class SampleFormController extends Controller //この行、元から
 			"password" => ['required',new AlphaNumHalf,'max:20','min:8'],
 			//パスワード確認 https://www.kaasan.info/archives/3719
 			"password_confirmation" => ["same:password"],
-			"email" => ['required','email:rfc,dns','max:200','unique:App\Models\members,email'],
+			"email" => ['required','email:rfc,dns','max:200','unique:App\Models\members,email,NULL,id,deleted_at,NULL'],
 		]);
 
 		if($validator->fails()){

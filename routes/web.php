@@ -75,4 +75,8 @@ Route::get('/item/all/detail/review_show', "ItemAllController@reviewall")->name(
 
 
 // マイページ詳細
-Route::get('/member/detail', "MemberController@show")->name("member.show")->middleware('auth');
+Route::get('/member/detail', "MemberController@all")->name("member.all")->middleware('auth');
+
+//退会画面
+Route::get('/member/detail/delete','MemberController@delete_confirm')->name('member.delete_confirm'); //警告画面に飛ばしたいため追記
+Route::post('/member/detail/delete','MemberController@destroy')->name("member.destroy"); //destroyを追記

@@ -27,7 +27,6 @@ class CreateUsersTable extends Migration
                 $table->rememberToken();
                 $table->timestamps();
                 $table->softDeletes();
-                //$table->timestamps();
             });
         }
     }
@@ -39,6 +38,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('deleted_at');
+        });
     }
 }

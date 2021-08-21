@@ -9,12 +9,20 @@ use Illuminate\Notifications\Notifiable;
 
 use App\Notifications\PasswordResetNotification; //パスワードリセットメールについて？
 
-
+#論理削除の場所を指示
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    
+    #論理削除の利用を宣言
+    use SoftDeletes;
 
+    protected $table = 'users';
+    protected $dates = ['deleted_at'];
+
+
+    use Notifiable;
     /**
      * The attributes that are mass assignable.
      *

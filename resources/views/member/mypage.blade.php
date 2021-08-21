@@ -53,7 +53,7 @@
         <p>{{ Auth::user()->email}}</p>
     </div>
 
-
+    <a class="back-btn" href="/member/detail/delete?id={{ Auth::user()->id}}">退会</a>
 
 
 </div>

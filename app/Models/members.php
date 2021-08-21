@@ -8,34 +8,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class members extends Model
 {
     //use HasFactory;
-
+    use SoftDeletes;
     protected $table = "users";
-    protected $fillable = ['name_sei','name_mei','nickname','gender','password','email'];
+    protected $fillable = ['name_sei','name_mei','nickname','gender','password','email','deleted_at'];
 
-    // function create() {
-        
-        // members::create([
-        //     'name_sei' => input('name_sei'),
-        //     'name_mei' => input('name_mei'),
-        //     'nickname' => input('nickname'),
-        //     'gender' => input('gender'),
-        //     'password' => input('password'),
-        //     'email' => input('email'),
-        // ]);
-    // }
-
-    // protected $hidden = [
-    //     'password',
-    //     'remember_token',
-    // ];
-
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime',
-    // ];
 }
 
 
