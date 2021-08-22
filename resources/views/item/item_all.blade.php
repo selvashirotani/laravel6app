@@ -163,15 +163,15 @@
         </p>
         <p class="item_name"><a class="detail-name" href="/item/all/detail?number={{$item->id}}">{{$item->name}}</a></p>
 
-        @if(0 < $evaluation && $evaluation <= 1)
+        @if(0 < $item->evaluation && $item->evaluation <= 1)
         <p class="item_review">総合評価　★　　　　　1</p>
-        @elseif(1 < $evaluation && $evaluation <= 2)
+        @elseif(1 < $item->evaluation && $item->evaluation <= 2)
         <p class="item_review">総合評価　★★　　　　2</p>
-        @elseif(2 < $evaluation && $evaluation <= 3)
+        @elseif(2 < $item->evaluation && $item->evaluation <= 3)
         <p class="item_review">総合評価　★★★　　　3</p>
-        @elseif(3 < $evaluation && $evaluation<= 4)
+        @elseif(3 < $item->evaluation && $item->evaluation<= 4)
         <p class="item_review">総合評価　★★★★　　4</p>
-        @elseif(4 < $evaluation && $evaluation<= 5)
+        @elseif(4 < $item->evaluation && $item->evaluation<= 5)
         <p class="item_review">総合評価　★★★★★　5</p>
         @else
         <p class="item_review">レビューなし</p>

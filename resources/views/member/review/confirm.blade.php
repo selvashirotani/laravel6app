@@ -9,6 +9,7 @@
     <title>Laravel</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/item_all.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/review.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- こちら参考に二重送信対策(2021080416:11)
     https://javascript.programmer-reference.com/js-prevention-twice-submit/ -->
@@ -33,7 +34,7 @@
 <div class="header">
             
     <div class = "left-column">
-            <p> 商品レビュー登録</p>
+            <p> 商品レビュー編集確認</p>
     </div>
 
     <div class = "right-column">
@@ -43,6 +44,7 @@
 </div>
 
 <div class="main">
+
 <!-- 一覧ここから -->
 @if(!empty($items))
     @foreach ($items as $item)
@@ -53,33 +55,31 @@
         @endif
 
         <p class="item_name">{{$item->name}}</p>
-        
-        @if(0 < $evaluation && $evaluation == 1)
+       
+        @if(0 < $item->evaluation && $item->evaluation <= 1)
         <p class="item_review">総合評価　★　　　　　1</p>
-        @elseif(1 < $evaluation && $evaluation <= 2)
+        @elseif(1 < $item->evaluation && $item->evaluation <= 2)
         <p class="item_review">総合評価　★★　　　　2</p>
-        @elseif(2 < $evaluation && $evaluation <= 3)
+        @elseif(2 < $item->evaluation && $item->evaluation <= 3)
         <p class="item_review">総合評価　★★★　　　3</p>
-        @elseif(3 < $evaluation && $evaluation<= 4)
+        @elseif(3 < $item->evaluation && $item->evaluation<= 4)
         <p class="item_review">総合評価　★★★★　　4</p>
-        @elseif(4 < $evaluation && $evaluation<= 5)
+        @elseif(4 < $item->evaluation && $item->evaluation<= 5)
         <p class="item_review">総合評価　★★★★★　5</p>
         @else
         <p class="item_review">レビューなし</p>
         @endif
-
+        
     </div>
 
     @endforeach
 
 @endif
 
-
-
-<form method="post" action="{{ route('itemall.send') }}" onsubmit="return checkNijyuSubmit();">
+<form method="post" action="{{ route('review.send') }}" onsubmit="return checkNijyuSubmit();">
 	@csrf
 		<div class="element_wrap">
-			<label>商品名</label>
+			<label>商品評価</label>
 			<p>{{ $input["evaluation"] }}</p>
 		</div>
         <div class="element_wrap">
@@ -87,22 +87,11 @@
 			<p>{!! nl2br($input["comment"]) !!}</p>
 		
 		</div>
+    <input type="submit" name="btn_submit" id="btnSubmit" value="更新する">
     <button type="button" name="btn_back" onclick=history.back()>前に戻る</button>
-    <input type="submit" name="btn_submit" id="btnSubmit" value="登録する">
 </form>
 
-<?php
-    if(!empty($_SERVER['HTTP_REFERER'])){
-        $prev_url = parse_url($_SERVER['HTTP_REFERER']);
-    }
-    
-?>
 
-@if(!empty($prev_url["query"]))
-    <a class="back-btn" href="/item/all/detail?{{$prev_url["query"]}}">商品詳細に戻る</a>
-@else
-    <a class="back-btn" href="{{ url('/item/all') }}">商品詳細に戻る</a>
-@endif
 </div>
 
 </body>

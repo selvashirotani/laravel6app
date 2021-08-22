@@ -83,15 +83,9 @@ class ItemAllController extends Controller
 
         //1ページにつき10件ずつ表示
         $items = $query->orderBy('id', 'desc')->paginate(10);
-
-        foreach($items as $item){
-            $evaluation = items::where('products.id',$item->id)
-            ->join('reviews','products.id','=','reviews.product_id')
-            ->avg('reviews.evaluation');
-        }
        
         return view('item.item_all',compact(
-            'items','category','subcategory','evaluation'
+            'items','category','subcategory'
         ));
     }
 

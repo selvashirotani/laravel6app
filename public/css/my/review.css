@@ -1,0 +1,114 @@
+.reviews{
+	position:relative;
+	width:100%;
+	height:220px;
+	border-bottom: medium solid #000000;
+	margin-top: 20px;
+}
+
+.img_right{
+	position:absolute;
+	float:left;
+	top:10px;
+}
+
+.item_cate{
+	position:absolute;
+	border: thin solid #000000;
+	background-color: #fff;
+	top:5px;
+	left:400px;
+	padding:10px;
+	height:15px;	
+}
+
+.item_name{
+	position:absolute;
+	top:50px;
+	left:400px;
+}
+
+.review_evaluation{
+    position:absolute;
+	top:85px;
+	left:400px;
+}
+
+.review_comment{
+    position:absolute;
+	top:110px;
+	left:400px;
+}
+
+.btn-1{
+	display       : inline-block;
+	border-radius: 3px;
+	font-size: 100%;
+	text-align    : center;      /* 文字位置   */
+	cursor        : pointer;     /* カーソル   */
+	padding: 9px 20px;
+	background: #3668d4;
+	color: #fff;
+	line-height   : 1em;         /* 1行の高さ  */
+	border:medium solid #3668d4;
+	text-decoration: none;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 20px;
+	position:absolute;
+	top:150px;
+	left:400px;
+}
+
+.btn-2{
+	display       : inline-block;
+	border-radius: 3px;
+	font-size: 100%;
+	text-align    : center;      /* 文字位置   */
+	cursor        : pointer;     /* カーソル   */
+	padding: 9px 20px;
+	background: #3668d4;
+	color: #fff;
+	line-height   : 1em;         /* 1行の高さ  */
+	border:medium solid #3668d4;
+	text-decoration: none;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 20px;
+	position:absolute;
+	top:150px;
+	left:580px;
+}
+
+
+/* ページネーション関連 */
+/* ページ送りを中央寄せ */
+.pagination {
+    text-align: right;
+	
+}
+
+/* ページ送りを横並びに */
+.pagination li{
+    display: inline-block;
+
+}
+
+.page-now{
+	border: thin solid #000000;
+	background-color: rgb(104, 104, 104);
+	padding:5px;
+	color: #fff;
+}
+
+.page-item{
+	border: thin solid #000000;
+	background-color: #fff;
+	padding:5px;
+}
+
+.pagination a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}

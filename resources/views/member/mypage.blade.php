@@ -56,6 +56,8 @@
     </div>
     <a class="submit-btn" href="/member/detail/change_email?id={{ Auth::user()->id}}">メールアドレス変更</a>
     </br>
+    <a class="submit-btn" href="/member/detail/review?id={{ Auth::user()->id}}">商品レビュー管理</a>
+    </br>
     <a class="back-btn" href="/member/detail/delete?id={{ Auth::user()->id}}">退会</a>
 
 

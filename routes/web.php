@@ -98,3 +98,14 @@ Route::post('/member/detail/change_email','MemberController@change_email')->name
 //メールアドレス変更の認証
 Route::get('/member/detail/auth_email','MemberController@auth_email_show')->name('member.auth_email_show');
 Route::post('/member/detail/auth_email','MemberController@auth_email')->name("member.auth_email");
+
+//レビュー関連
+Route::get('/member/detail/review','MemberReviewController@all')->name('review.all');
+Route::get('/member/detail/review/edit','MemberReviewController@show')->name("review.show");
+Route::post('/member/detail/review/edit','MemberReviewController@edit')->name("review.edit");
+Route::get('/member/detail/review/edit/confirm','MemberReviewController@confirm')->name("review.confirm");
+Route::post('/member/detail/review/edit/confirm','MemberReviewController@send')->name("review.send");
+
+//レビュー削除
+Route::get('/member/detail/review/edit/delete','MemberReviewController@view')->name("review.view");
+Route::post('/member/detail/review/edit/delete','MemberReviewController@delete')->name("review.delete");
