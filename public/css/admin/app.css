@@ -1,0 +1,176 @@
+.main{
+	background-color: #d6e9f8;
+	height:100%;
+	width:100%;
+	padding:20px;
+}
+
+/* それぞれの登録 */
+.element_wrap {
+	margin-bottom: 10px;
+	padding: 10px 0;
+
+	text-align: left;
+}
+
+label {
+	display: inline-block;
+	margin-bottom: 10px;
+	font-weight: bold;
+	width: 150px;
+}
+
+/* 氏名の際に使用 */
+.element_wrap p {
+	display: inline-block;
+	margin:  0;
+	text-align: left;
+}
+
+/* 性別で使用 */
+label[for=gender_male],
+label[for=gender_female] {
+	margin-right: 10px;
+	width: auto;
+	font-weight: normal;
+}
+
+/* エラーメッセージ */
+.invalid-feedback{
+	color: #ff2e5a;
+	font-size: 86%;
+	text-align: left;
+}
+
+/* 確認ボタン */
+input[name=btn_confirm],
+input[name=btn_submit],
+button[name=btn_submit]{
+	margin-top: 10px;
+	padding: 5px 20px;
+	font-size: 100%;
+	color: #fff;
+	cursor: pointer;
+	border:medium solid #4144f8;
+	border-radius: 3px;
+	background: #4144f8;
+}
+
+button[name=btn_back],
+button[name=imege_1],
+button[name=imege_2],
+button[name=imege_3],
+button[name=imege_4]
+{
+	margin-top: 10px;
+	padding: 5px 20px;
+	font-size: 100%;
+	color: #4144f8;
+	cursor: pointer;
+	border:medium solid #4144f8;
+	border-radius: 3px;
+	background: #fff;
+}
+
+/* 登録系ここまで */
+
+
+/* ログイン機能(課題2) */
+.headerbutton{
+	display       : inline-block;
+	border-radius : 5%;          /* 角丸       */
+	font-size     : 13pt;        /* 文字サイズ */
+	text-align    : center;      /* 文字位置   */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 15px 24px;   /* 余白       */
+	background    : rgb(200, 202, 209);     /* 背景色     */
+	color         : #000000;     /* 文字色     */
+	line-height   : 1em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	border        : 2px solid rgb(0, 0, 0);    /* 枠の指定 */
+	text-decoration: none;
+}
+
+.header-msg{
+	display       : inline-block;
+}
+
+.back-btn{
+	display       : inline-block;
+	border-radius: 3px;
+	font-size: 100%;
+	text-align    : center;      /* 文字位置   */
+	cursor        : pointer;     /* カーソル   */
+	padding: 9px 20px;
+	background: #fff;
+	color: #4144f8;
+	line-height   : 1em;         /* 1行の高さ  */
+	border:medium solid #4144f8;
+	text-decoration: none;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 20px;
+
+}
+
+.submit-btn{
+	display       : inline-block;
+	border-radius: 3px;
+	font-size: 100%;
+	text-align    : center;      /* 文字位置   */
+	cursor        : pointer;     /* カーソル   */
+	padding: 9px 20px;
+	background: #4144f8;
+	color: #fff;
+	line-height   : 1em;         /* 1行の高さ  */
+	border:medium solid #4144f8;
+	text-decoration: none;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 20px;
+
+}
+
+.header{
+	background-color:rgb(200, 202, 209);
+	height:50px;
+	width:100%;
+	padding:20px;
+}
+
+.laravelwork h1{
+	font-size:50px;
+	text-align: center;
+}
+
+.left-column{
+    float:left;
+    display: inline-block;
+}
+
+.right-column{
+    float:right;
+    display: inline-block;
+}
+
+.wide-text{
+	/* display: block; */
+    width: 60%;
+	height:150px;
+    padding: 0.5em;
+    border: 1px solid #999;
+    box-sizing: border-box;
+    background: #f2f2f2;
+    margin: 0.5em 0;
+}
+
+/* 画像送信 */
+input[type=file] {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0;
+	height: 0;
+	opacity: 0;
+}
+
