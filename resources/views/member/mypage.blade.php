@@ -36,7 +36,7 @@
 
     <div class="element_wrap">
         <label>性別</label>
-        @if(Auth::user()->gender === "1")
+        @if(Auth::user()->gender === 1)
         <p>男性</p>
         @else
         <p>女性</p>

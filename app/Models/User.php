@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Kyslik\ColumnSortable\Sortable;//追記
 
 use App\Notifications\PasswordResetNotification; //パスワードリセットメールについて？
 
@@ -17,10 +18,10 @@ class User extends Authenticatable
     
     #論理削除の利用を宣言
     use SoftDeletes;
+    use Sortable;
 
     protected $table = 'users';
     protected $dates = ['deleted_at'];
-
 
     use Notifiable;
     /**
@@ -29,7 +30,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = ['name_sei','name_mei','nickname','gender','password','email'];
-
+    public $sortable = ['id','created_at'];
     /**
      * The attributes that should be hidden for arrays.
      *

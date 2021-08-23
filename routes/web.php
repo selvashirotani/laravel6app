@@ -114,3 +114,8 @@ Route::post('/member/detail/review/edit/delete','MemberReviewController@delete')
 Route::get('/admin/login','Admin\AdminLoginController@form')->name("admin.form");
 Route::post('/admin/login','Admin\AdminLoginController@login')->name("admin.login");
 Route::get('/admin','Admin\AdminLoginController@view')->name("admin.view");
+
+//管理画面会員一覧
+Route::get('/admin/members','Admin\MemberController@all')->name("admin_member.all");
+
+

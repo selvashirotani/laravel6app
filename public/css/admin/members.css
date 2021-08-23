@@ -41,11 +41,20 @@
 }
 
 .search{
-	width:400px;
+	width:500px;
 	margin:0 auto;
 	padding:30px;
 	border: thin solid #000000;
 	background-color: #fff;
+}
+
+table{
+    margin:0 auto;
+	padding:30px;
+}
+
+td{
+    padding:10px;
 }
 
 input[name=btn_search]
@@ -110,6 +119,11 @@ input[name=btn_search]
 }
 
 .item_name a{
+	text-decoration: none;
+    color: black;
+}
+
+.direction a{
 	text-decoration: none;
     color: black;
 }

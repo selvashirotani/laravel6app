@@ -17,18 +17,8 @@
 </div class="header">
 
 <div class="main laravelwork">
-    <h1>laravel課題</h1>
+    <a class="back-btn" href="{{ url('/admin/members') }}">会員一覧</a>
+
 </div>
-
-
-<!-- 
-パスワードがちゃんと設定できたときにおくられる。    
-@if (session('status'))
-    <div class="alert alert-success" role="alert">
-        {{ session('status') }}
-    </div>
-@endif -->
-
-
 
 @endsection

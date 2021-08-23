@@ -44,8 +44,8 @@
                 <label for="gender_male"><input id="gender_male" type="radio" name="gender" value="1"  @if(old('gender')=="1") checked @endif />男性</label>
                 <label for="gender_female"><input id="gender_female" type="radio" name="gender" value="2" @if(old('gender')=="2") checked @endif/>女性</label>
                 @else
-                <label for="gender_male"><input id="gender_male" type="radio" name="gender" value="1"  @if(Auth::user()->gender=="1") checked @endif />男性</label>
-                <label for="gender_female"><input id="gender_female" type="radio" name="gender" value="2" @if(Auth::user()->gender=="2") checked @endif/>女性</label>
+                <label for="gender_male"><input id="gender_male" type="radio" name="gender" value="1"  @if(Auth::user()->gender==1) checked @endif />男性</label>
+                <label for="gender_female"><input id="gender_female" type="radio" name="gender" value="2" @if(Auth::user()->gender==2) checked @endif/>女性</label>
                 @endif
             </div>
 
