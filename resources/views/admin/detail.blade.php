@@ -8,11 +8,9 @@
 <div class="header">
             
 	<div class = "left-column">
-	@if(!empty($input['id']))
-		<p>会員編集</p>
-	@else
-		<p>会員登録</p>
-	@endif
+	
+		<p>会員詳細</p>
+
 	</div>
 
 	<div class = "right-column">
@@ -23,32 +21,27 @@
 </div class="header">
 
 <div class="main">
+@if(!empty($members))
+        @foreach ($members as $member)
 
-    <form method="post" action="{{ route('admin_member.send') }}" onsubmit="return checkNijyuSubmit();">
-	@csrf
-
-		<div class="element_wrap">
+        <div class="element_wrap">
 			<label>ID</label>
-			@if(!empty($input['id']))
-				<p>{{$input['id']}}</p>
-			@else
-				<p>登録後に自動採番</p>
-			@endif
+			<p>{{ $member->id}}</p>
 		</div>
 
 		<div class="element_wrap">
 			<label>氏名</label>
-			<p>{{ $input["name_sei"] }}　{{ $input["name_mei"] }}</p>
+			<p>{{ $member->name_sei}}　{{ $member->name_mei}}</p>
 		</div>
 
         <div class="element_wrap">
 			<label>ニックネーム</label>
-			<p>{{ $input["nickname"] }}</p>
+			<p>{{ $member->nickname}}</p>
 		</div>
 
 		<div class="element_wrap">
 			<label>性別</label>
-            @if($input["gender"] === "1")
+            @if($member->gender === 1)
 			<p>男性</p>
             @else
             <p>女性</p>
@@ -62,15 +55,24 @@
 
 		<div class="element_wrap">
 			<label>メールアドレス</label>
-			<p>{{ $input["email"] }}</p>
+			<p>{{ $member->email}}</p>
 		</div>
-		
-		<button type="button" name="btn_back" onclick=history.back()>前に戻る</button>
-		@if(!empty($input['id']))
-		<input type="submit" name="btn_submit" id="btnSubmit" value="編集完了">
-		@else
-		<input type="submit" name="btn_submit" id="btnSubmit" value="登録完了">
-		@endif
-	</form>
+    
+        <a class="back-btn" href="/admin/form?id={{$member->id}}">編集</a>
+    
+        <a class="back-btn" href="{{ route('admin_member.destroy') }}"
+            onclick="event.preventDefault();
+                            document.getElementById('delete-form').submit();">
+            削除
+        </a>
+       
+        <form id="delete-form" action="{{ route('admin_member.destroy',['$id'])}}" method="POST" class="d-none">
+        <input type="hidden" value="{{$id}}" name="user_id">
+                @csrf
+        </form>
+
+
+        @endforeach
+    @endif
 </div>
 @endsection

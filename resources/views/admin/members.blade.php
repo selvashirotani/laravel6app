@@ -97,7 +97,7 @@
         @foreach ($members as $member)
         <tr>
             <td>{{$member->id}}</td>
-            <td>{{$member->name_sei}} {{$member->name_mei}}</td>
+            <td><a href="/admin/members/detail?id={{$member->id}}">{{$member->name_sei}} {{$member->name_mei}}</a></td>
             <td>{{$member->email}}</td>
             <td>
             @if($member->gender === 1)
@@ -108,7 +108,7 @@
             </td>
             <td>{{$member->created_at->format('Y/m/d')}}</td>
             <td><a href="/admin/form?id={{$member->id}}">編集</a></td>
-            <td>詳細</td>
+            <td><a href="/admin/members/detail?id={{$member->id}}">詳細</a></td>
         </tr>
         @endforeach
 

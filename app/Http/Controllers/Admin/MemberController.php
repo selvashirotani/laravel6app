@@ -246,4 +246,38 @@ class MemberController extends Controller
 
     }
 
+    public function detail(Request $request){
+        
+        if(!empty($request->id)){
+            $id = $request->id;
+            $members = User::where('id',$id)
+                    ->get();
+            return view("admin.detail",compact(
+                'members','id'
+            ));
+
+        }else{
+            return view("admin.detail");
+        }
+       
+    }
+
+    public function delete_confirm(Request $request)
+    {
+      $id = (int)$request->id;
+      return view('member.delete_confirm',compact(
+          'id'
+      ));
+    }
+
+  public function destroy(Request $request)
+    {
+        if($request->user_id){
+            $user = User::find($request->user_id);
+            $user->delete();
+            return redirect()->action("Admin\MemberController@all");
+        }
+        
+    }
+
 }

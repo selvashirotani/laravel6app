@@ -122,3 +122,8 @@ Route::post('/admin/form','Admin\MemberController@post')->name("admin_member.pos
 Route::get('/admin/confirm','Admin\MemberController@confirm')->name("admin_member.confirm");
 Route::post('/admin/confirm','Admin\MemberController@send')->name("admin_member.send");
 
+//
+Route::get('/admin/members/detail','Admin\MemberController@detail')->name("admin_member.detail");
+//退会画面
+Route::get('/admin/members/delete','Admin\MemberController@delete_confirm')->name('admin_member.delete_confirm'); //警告画面に飛ばしたいため追記
+Route::post('/admin/members/delete','Admin\MemberController@destroy')->name("admin_member.destroy"); //destroyを追記
