@@ -117,5 +117,8 @@ Route::get('/admin','Admin\AdminLoginController@view')->name("admin.view");
 
 //管理画面会員一覧
 Route::get('/admin/members','Admin\MemberController@all')->name("admin_member.all");
-
+Route::get('/admin/form','Admin\MemberController@show')->name("admin_member.show");
+Route::post('/admin/form','Admin\MemberController@post')->name("admin_member.post");
+Route::get('/admin/confirm','Admin\MemberController@confirm')->name("admin_member.confirm");
+Route::post('/admin/confirm','Admin\MemberController@send')->name("admin_member.send");
 

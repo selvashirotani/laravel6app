@@ -45,6 +45,7 @@
 
 
 <div class="main">
+<a class="submit-btn" href="{{ url('/admin/form') }}">会員登録</a>
 <!-- 検索フォーム -->
     <div class="search">
         <form action="{{ route('admin_member.all') }}">
@@ -106,7 +107,7 @@
             @endif
             </td>
             <td>{{$member->created_at->format('Y/m/d')}}</td>
-            <td>編集</td>
+            <td><a href="/admin/form?id={{$member->id}}">編集</a></td>
             <td>詳細</td>
         </tr>
         @endforeach
