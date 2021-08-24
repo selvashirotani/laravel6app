@@ -5,17 +5,21 @@ namespace App\Models;
 //use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SubCategories;
+use Kyslik\ColumnSortable\Sortable;
 class Categories extends Model
 {
+    use Sortable;
+    public $sortable = ['id','created_at'];
+
     //use HasFactory;
     protected $table = 'product_categories';
     protected $fillable = ['id','name'];
 
-    // リレーション
-    // public function product_subcatergorys()
-    // {
-    //     return $this->hasMany(SubCategories::class);
-    // }
+    //リレーション
+    public function product_subcategories()
+    {
+        return $this->hasMany('App\Models\SubCategories','parent_category_id','id');
+    }
 
      // 配列の形で、全カテゴリーを返す
      public static function get_category() 
