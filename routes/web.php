@@ -130,3 +130,7 @@ Route::post('/admin/members/delete','Admin\MemberController@destroy')->name("adm
 
 //アイテム系
 Route::get('/admin/items/category','Admin\ItemsController@category')->name("admin_items.category");
+Route::get('/admin/items/form','Admin\ItemsController@show')->name("admin_items.show");
+Route::post('/admin/items/form','Admin\ItemsController@post')->name("admin_items.post");
+Route::get('/admin/items/confirm','Admin\ItemsController@confirm')->name("admin_items.confirm");
+Route::post('/admin/items/confirm','Admin\ItemsController@send')->name("admin_items.send");

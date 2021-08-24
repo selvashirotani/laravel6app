@@ -45,7 +45,7 @@
 
 
 <div class="main">
-
+<a class="submit-btn" href="{{ url('/admin/items/form') }}">商品カテゴリ登録</a>
 <!-- 検索フォーム -->
     <div class="search">
         <form action="{{ route('admin_items.category') }}">
@@ -83,8 +83,8 @@
             <td>{{$item->id}}</td>
             <td>{{$item->category_name}}</td>
             <td>{{$item->created_at}}</td>
-            <td><a href="/admin/form?id={{$item->category_id}}">編集</a></td>
-            <td><a href="/admin/members/detail?id={{$item->category_id}}">詳細</a></td>
+            <td><a href="/admin/items/form?id={{$item->id}}">編集</a></td>
+            <td><a href="/admin/items/form?id={{$item->id}}">詳細</a></td>
         </tr>
         @endforeach
 
