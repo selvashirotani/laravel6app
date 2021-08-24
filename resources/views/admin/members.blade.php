@@ -57,16 +57,17 @@
 
         <div class="element_wrap">
             <label for="name">性別</label>
-            @foreach (config('master') as $index => $value)
-            <label for="{{$value}}">
-                <input id="{{$value}}" type="radio" name="gender" value="{{$index}}" 
-                    @if(old('master')=="{{$index}}") checked @endif 
-                    @if(empty(old()) and $index == ('master') ) checked="checked"
-                        @elseif($index == old('gender'))) checked="checked"
-                        @endif/>
-                    {{$value}}
+            
+            <label for="1">
+                <input id="1" type="checkbox" name="gender[]" value="1" {{ old("gender") === "1"? 'checked="checked"' : '' }} >
+                   男性
             </label>
-            @endforeach
+
+            <label for="2">
+                <input id="2" type="checkbox" name="gender[]" value="2" {{ old("gender") === "1"? 'checked="checked"' : '' }}>
+                   女性
+            </label>
+
         </div>
 
         <div class="element_wrap">

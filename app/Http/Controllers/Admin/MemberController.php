@@ -24,7 +24,7 @@ class MemberController extends Controller
         $gender = $request->input('gender');
         $free_word = $request->input('free_word');
 
-        if(!empty($member_id) && !empty($gender) && !empty($free_word)){
+        if(!empty($member_id) && !empty($gender[0]) && empty($gender[1]) && !empty($free_word)){
             $query = User::where('id',$member_id)
                     ->where('gender',$gender)
                     ->where(function($query)use ($free_word){
@@ -33,7 +33,7 @@ class MemberController extends Controller
                     ->orWhere('email','like','%'.$free_word.'%');
                     });
 
-        }elseif(!empty($member_id) && !empty($gender) && empty($free_word)){
+        }elseif(!empty($member_id) && !empty($gender[0]) && empty($gender[1]) && empty($free_word)){
             $query = User::where('id',$member_id)
                     ->where('gender',$gender);
         }elseif(!empty($member_id) && empty($gender) && !empty($free_word)){
@@ -43,7 +43,7 @@ class MemberController extends Controller
                     ->orWhere('name_mei','like','%'.$free_word.'%')
                     ->orWhere('email','like','%'.$free_word.'%');
                     });
-        }elseif(empty($member_id) && !empty($gender) && !empty($free_word)){
+        }elseif(empty($member_id) && !empty($gender[0]) && empty($gender[1]) && !empty($free_word)){
             $query = User::where('gender',$gender)
                     ->where(function($query)use ($free_word){
                         $query->where('name_sei','like','%'.$free_word .'%')
@@ -58,7 +58,7 @@ class MemberController extends Controller
                 $query->where('id',$member_id);
             }
 
-            if(!empty($gender)){
+            if(!empty($gender[0]) && empty($gender[1])){
                 $query->where('gender',$gender);
             }
 
@@ -90,9 +90,16 @@ class MemberController extends Controller
             $members = $query->orderBy($id, 'desc')->sortable()->paginate(10);
         }
         
-        return view('admin.members',compact(
-            'members'
-        ));
+        if($gender){
+            return view('admin.members',compact(
+                'members','gender'
+            ));
+        }else{
+            return view('admin.members',compact(
+                'members'
+            ));
+        }
+        
     }
 
     public function show(Request $request){

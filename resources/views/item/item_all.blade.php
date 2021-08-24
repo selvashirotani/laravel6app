@@ -102,6 +102,7 @@
 <!-- 検索フォーム -->
 
 <!-- 一覧ここから -->
+
 @if(!empty($items))
     @foreach ($items as $item)
     <div class="items">

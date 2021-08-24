@@ -42,8 +42,6 @@ class ItemAllController extends Controller
         $search_sub_category = $request->input('product_subcategory_id');
         $free_word  = $request->input('free_word');
 
-        //$query = items::orderBy('id', 'desc')->get();
-
         // プルダウンメニューで選択した場合、一致するカラムを取得します
         //カテゴリもフリー ワードもある場合
         if(!empty($search_category)&& !empty($free_word )){
@@ -64,6 +62,8 @@ class ItemAllController extends Controller
 
             //query作成
             $query = items::query();
+            
+
 
             if(!empty($search_category)){
                 $query->where('product_category_id',$search_category);
@@ -83,7 +83,7 @@ class ItemAllController extends Controller
 
         //1ページにつき10件ずつ表示
         $items = $query->orderBy('id', 'desc')->paginate(10);
-       
+        
         return view('item.item_all',compact(
             'items','category','subcategory'
         ));
