@@ -108,7 +108,7 @@
     </div>
 
     <div class="element_wrap">
-        <label for="comment">商品説明</label>
+        <label for="comment">商品コメント</label>
         <textarea class='wide-text' name="comment" value="@if(old('comment')){{old('comment') }} @else {{$item->comment}} @endif" >
         @if(old('comment')){{old('comment') }} @else {{$item->comment}} @endif
         </textarea>
