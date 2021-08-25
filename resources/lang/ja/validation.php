@@ -106,7 +106,7 @@ return [
     'required_with' => 'The :attribute field is required when :values is present.',
     'required_with_all' => 'The :attribute field is required when :values are present.',
     'required_without' => 'The :attribute field is required when :values is not present.',
-    'required_without_all' => 'The :attribute field is required when none of :values are present.',
+    'required_without_all' => '商品小カテゴリは一つ以上入力してください。',
     'prohibited' => 'The :attribute field is prohibited.',
     'prohibited_if' => 'The :attribute field is prohibited when :other is :value.',
     'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
@@ -168,7 +168,18 @@ return [
         'imege_1' => '画像',
         'product_content' => '商品説明',
         'evaluation' => '商品評価',
-        'comment' => '商品説明'
+        'comment' => '商品説明',
+        'category_name' => '商品大カテゴリ',
+        'subcategory_name_1' => '商品小カテゴリ',
+        'subcategory_name_2' => '商品小カテゴリ',
+        'subcategory_name_3' => '商品小カテゴリ',
+        'subcategory_name_4' => '商品小カテゴリ',
+        'subcategory_name_5' => '商品小カテゴリ',
+        'subcategory_name_6' => '商品小カテゴリ',
+        'subcategory_name_7' => '商品小カテゴリ',
+        'subcategory_name_8' => '商品小カテゴリ',
+        'subcategory_name_9' => '商品小カテゴリ',
+        'subcategory_name_10' => '商品小カテゴリ',
     ],
 
 ];
