@@ -98,7 +98,7 @@
     </div>
 
     <div class="element_wrap">
-        <label for="comment">商品説明</label>
+        <label for="comment">商品コメント</label>
         <textarea class='wide-text' name="comment" value="{{ old('comment') }}" >{{ old('comment') }}</textarea>
     </div>
     <input type="hidden" id="submit" name="product_id" value="{{$number}}" />

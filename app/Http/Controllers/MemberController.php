@@ -139,11 +139,17 @@ class MemberController extends Controller
         $member = User::where('id', $request->member_id)->first();
         $member->auth_code = $auth_code;
         $member->save();
-
+        
+        global $mail_to;
+        $mail_to = $input['email'];
+        
         Mail::send('member.emailreset',["auth_code" => $auth_code],function($message){
-            $message->to('a@gmail.com')
+            global $mail_to;
+            $message->to($mail_to)
                     ->subject('メールアドレス変更の認証コード');
         });
+
+     
 
         $request->session()->put("email_input", $input);
         return redirect()->action("MemberController@auth_email_show");
