@@ -158,6 +158,7 @@ class ItemsController extends Controller
                 $category->category_name = $input["category_name"];
     
                 $category->save();
+                $category_id = $category->id; 
                 \DB::commit();
 
             }catch(\Throwable $e){
@@ -165,7 +166,7 @@ class ItemsController extends Controller
                 abort(500); //500エラーを表示する。
             }
 
-            $category_id = Categories::where('category_name',$input["category_name"])->first();
+            $category_id = Categories::where('id',$category_id)->first();
 
             SubCategories::all(); 
 
@@ -341,8 +342,7 @@ class ItemsController extends Controller
             $category->save();
 
             //小カテゴリ削除
-            $subcategory_delete = SubCategories::where('parent_category_id',$input["id"])->first();
-            $subcategory_delete->delete();
+            $subcategory_delete = SubCategories::where('parent_category_id',$input["id"])->delete();
 
             //新たに小カテゴリいれる。
             $category_id = Categories::where('id',$input['id'])->first();
