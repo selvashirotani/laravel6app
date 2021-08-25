@@ -105,7 +105,7 @@
 <!-- 検索フォーム -->
 
 <!-- 一覧ここから -->
-{{var_dump($items)}}
+
 @if(!empty($items))
     @foreach ($items as $item)
     <div class="items">
