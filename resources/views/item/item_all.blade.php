@@ -54,6 +54,9 @@
 
 
 <div class="main">
+
+
+
 <!-- 検索フォーム -->
     <div class="search">
         <form action="{{ route('itemall.show') }}">
@@ -102,7 +105,7 @@
 <!-- 検索フォーム -->
 
 <!-- 一覧ここから -->
-
+{{var_dump($items)}}
 @if(!empty($items))
     @foreach ($items as $item)
     <div class="items">
@@ -163,6 +166,7 @@
 			@endif
         </p>
         <p class="item_name"><a class="detail-name" href="/item/all/detail?number={{$item->id}}">{{$item->name}}</a></p>
+
 
         @if(0 < $item->evaluation && $item->evaluation <= 1)
         <p class="item_review_all">総合評価　★　　　　　1</p>

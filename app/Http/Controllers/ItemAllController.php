@@ -61,9 +61,11 @@ class ItemAllController extends Controller
         }else{
 
             //query作成
-            $query = items::query();
-            
+            //$query = items::query();
 
+            $sql = "select reviews.product_id,MAX(products.member_id) as member_id,MAX(products.imege_1) as imege_1,MAX(products.product_subcategory_id) as product_subcategory_id, MAX(products.id) as id,MAX(products.name) as name,AVG(reviews.evaluation) as evaluation from `products` left join `reviews` on `products`.`id` = `reviews`.`product_id` group by `product_id`";
+
+            $query = DB::select($sql);
 
             if(!empty($search_category)){
                 $query->where('product_category_id',$search_category);
@@ -80,10 +82,14 @@ class ItemAllController extends Controller
             }
         }
  
-
+        
+        
         //1ページにつき10件ずつ表示
         $items = $query->orderBy('id', 'desc')->paginate(10);
+        //$items = collect($query)->sortByDesc('id')->take(10);
         
+        // $array =json_decode(json_encode($query->get()), true);
+
         return view('item.item_all',compact(
             'items','category','subcategory'
         ));
