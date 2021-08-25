@@ -128,7 +128,7 @@ Route::get('/admin/members/detail','Admin\MemberController@detail')->name("admin
 Route::get('/admin/members/delete','Admin\MemberController@delete_confirm')->name('admin_member.delete_confirm'); //警告画面に飛ばしたいため追記
 Route::post('/admin/members/delete','Admin\MemberController@destroy')->name("admin_member.destroy"); //destroyを追記
 
-//アイテム系
+//カテゴリ系
 Route::get('/admin/items/category','Admin\ItemsController@category')->name("admin_items.category");
 Route::get('/admin/items/form','Admin\ItemsController@show')->name("admin_items.show");
 Route::post('/admin/items/form','Admin\ItemsController@post')->name("admin_items.post");
@@ -140,3 +140,17 @@ Route::get('/admin/items/detail','Admin\ItemsController@detail')->name("admin_it
 //カテゴリ削除
 Route::get('/admin/items/delete','Admin\ItemsController@delete_confirm')->name('admin_items.delete_confirm'); //警告画面に飛ばしたいため追記
 Route::post('/admin/items/delete','Admin\ItemsController@destroy')->name("admin_items.destroy"); //destroyを追記
+
+
+//アイテム系
+Route::get('/admin/products/all','Admin\ProductsController@all')->name("admin_products.all");
+Route::get('/admin/products/form','Admin\ProductsController@show')->name("admin_products.show");
+Route::post('/admin/products/form','Admin\ProductsController@post')->name("admin_products.post");
+Route::get('/admin/products/confirm','Admin\ProductsController@confirm')->name("admin_products.confirm");
+Route::post('/admin/products/confirm','Admin\ProductsController@send')->name("admin_products.send");
+
+Route::get('/admin/products/detail','Admin\ProductsController@detail')->name("admin_products.detail");
+
+//カテゴリ削除
+Route::get('/admin/products/delete','Admin\ProductsController@delete_confirm')->name('admin_products.delete_confirm'); //警告画面に飛ばしたいため追記
+Route::post('/admin/products/delete','Admin\ProductsController@destroy')->name("admin_products.destroy"); //destroyを追記

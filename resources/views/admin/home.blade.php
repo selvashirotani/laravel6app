@@ -19,6 +19,7 @@
 <div class="main laravelwork">
     <a class="back-btn" href="{{ url('/admin/members') }}">会員一覧</a>
     <a class="back-btn" href="{{ url('/admin/items/category') }}">商品カテゴリ一覧</a>
+    <a class="back-btn" href="{{ url('/admin/products/all') }}">商品一覧</a>
 
 </div>
 
