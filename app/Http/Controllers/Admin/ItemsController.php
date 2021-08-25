@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\items; //モデルクラス呼び出し
 use App\Models\Categories; //モデルクラス呼び出し
 use App\Models\SubCategories; //モデルクラス呼び出し
+use App\Models\Admin_Categories; //モデルクラス呼び出し
+use App\Models\Admin_SubCategories; //モデルクラス呼び出し
 use Validator; 
 
 class ItemsController extends Controller
@@ -525,4 +527,39 @@ class ItemsController extends Controller
 		return redirect()->action("Admin\ItemsController@category");
 
     }
+
+    public function detail(Request $request){
+        if(!empty($request->id)){
+            $id = $request->id;
+            $categories = Categories::where('product_categories.id',$id)
+                ->select('product_categories.id as id','product_categories.category_name as category_name','product_subcategories.subcategory_name as subcategory_name','product_categories.created_at as created_at')
+                ->join('product_subcategories','product_categories.id','=','product_subcategories.parent_category_id')
+                ->get();
+
+            $category =json_decode(json_encode($categories), true);
+
+            return view("admin.items.detail",compact(
+                'categories','category'
+            ));
+
+        }else{
+            return view("admin.items.detail");
+        }
+    }
+
+    public function delete_confirm(Request $request)
+    {
+        //
+    }
+
+  public function destroy(Request $request)
+    {
+        if($request->category_id){
+            $category = Admin_Categories::find($request->category_id)->delete();
+            $sub_category = Admin_SubCategories::where('parent_category_id',$request->category_id)->delete();
+            return redirect()->action("Admin\ItemsController@category");
+        }
+        
+    }
+
 }

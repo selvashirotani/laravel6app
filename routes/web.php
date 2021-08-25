@@ -134,3 +134,9 @@ Route::get('/admin/items/form','Admin\ItemsController@show')->name("admin_items.
 Route::post('/admin/items/form','Admin\ItemsController@post')->name("admin_items.post");
 Route::get('/admin/items/confirm','Admin\ItemsController@confirm')->name("admin_items.confirm");
 Route::post('/admin/items/confirm','Admin\ItemsController@send')->name("admin_items.send");
+
+Route::get('/admin/items/detail','Admin\ItemsController@detail')->name("admin_items.detail");
+
+//カテゴリ削除
+Route::get('/admin/items/delete','Admin\ItemsController@delete_confirm')->name('admin_items.delete_confirm'); //警告画面に飛ばしたいため追記
+Route::post('/admin/items/delete','Admin\ItemsController@destroy')->name("admin_items.destroy"); //destroyを追記

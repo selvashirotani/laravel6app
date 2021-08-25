@@ -79,13 +79,15 @@
 
         @if(!empty($items))
         @foreach ($items as $item)
+            @if(empty($item->deleted_at))
         <tr>
             <td>{{$item->id}}</td>
             <td>{{$item->category_name}}</td>
             <td>{{$item->created_at}}</td>
             <td><a href="/admin/items/form?id={{$item->id}}">編集</a></td>
-            <td><a href="/admin/items/form?id={{$item->id}}">詳細</a></td>
+            <td><a href="/admin/items/detail?id={{$item->id}}">詳細</a></td>
         </tr>
+            @endif
         @endforeach
 
     </table>
