@@ -86,7 +86,7 @@
             <td>{{$review->id}}</td>
             <td>{{$review->product_id}}</td>
             <td>{{$review->evaluation}}</td>
-            <td>{{$review->comment}}</td>
+            <td><a href="/admin/reviews/detail?id={{$review->id}}">{{$review->comment}}</a></td>
             <td>{{$review->created_at}}</td>
             <td><a href="/admin/reviews/form?id={{$review->id}}">編集</a></td>
             <td><a href="/admin/reviews/detail?id={{$review->id}}">詳細</a></td>
