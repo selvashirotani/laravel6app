@@ -151,6 +151,20 @@ Route::post('/admin/products/confirm','Admin\ProductsController@send')->name("ad
 
 Route::get('/admin/products/detail','Admin\ProductsController@detail')->name("admin_products.detail");
 
-//カテゴリ削除
+//アイテム削除
 Route::get('/admin/products/delete','Admin\ProductsController@delete_confirm')->name('admin_products.delete_confirm'); //警告画面に飛ばしたいため追記
 Route::post('/admin/products/delete','Admin\ProductsController@destroy')->name("admin_products.destroy"); //destroyを追記
+
+
+//レビュー系
+Route::get('/admin/reviews/all','Admin\ReviewsController@all')->name("admin_reviews.all");
+Route::get('/admin/reviews/form','Admin\ReviewsController@show')->name("admin_reviews.show");
+Route::post('/admin/reviews/form','Admin\ReviewsController@post')->name("admin_reviews.post");
+Route::get('/admin/reviews/confirm','Admin\ReviewsController@confirm')->name("admin_reviews.confirm");
+Route::post('/admin/reviews/confirm','Admin\ReviewsController@send')->name("admin_reviews.send");
+
+Route::get('/admin/reviews/detail','Admin\ReviewsController@detail')->name("admin_reviews.detail");
+
+//レビュー削除
+Route::get('/admin/reviews/delete','Admin\ReviewsController@delete_confirm')->name('admin_reviews.delete_confirm'); //警告画面に飛ばしたいため追記
+Route::post('/admin/reviews/delete','Admin\ReviewsController@destroy')->name("admin_reviews.destroy"); //destroyを追記

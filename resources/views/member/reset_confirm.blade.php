@@ -5,6 +5,7 @@
 <div class="main">
 
 	<h1>会員情報変更確認画面</h1>
+	
 
     <form method="post" action="{{ route('member.send') }}" onsubmit="return checkNijyuSubmit();">
 	@csrf
@@ -21,7 +22,7 @@
 
 		<div class="element_wrap">
 			<label>性別</label>
-            @if($input["gender"] === 1)
+            @if($input["gender"] === "1")
 			<p>男性</p>
             @else
             <p>女性</p>

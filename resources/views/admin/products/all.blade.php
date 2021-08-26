@@ -82,7 +82,7 @@
             @if(empty($item->deleted_at))
         <tr>
             <td>{{$item->id}}</td>
-            <td>{{$item->name}}</td>
+            <td><a href="/admin/products/detail?id={{$item->id}}">{{$item->name}}</a></td>
             <td>{{$item->created_at}}</td>
             <td><a href="/admin/products/form?id={{$item->id}}">編集</a></td>
             <td><a href="/admin/products/detail?id={{$item->id}}">詳細</a></td>

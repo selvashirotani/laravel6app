@@ -9,6 +9,7 @@ use App\Models\items;
 use App\Models\members; //モデルクラス呼び出し
 use App\Models\Categories; //モデルクラス呼び出し
 use App\Models\SubCategories; //モデルクラス呼び出し
+use App\Models\reviews;
 use Illuminate\Support\Facades\DB; //DBクラス
 use App\Providers\RouteServiceProvider;
 
@@ -451,5 +452,49 @@ class ProductsController extends Controller
         return redirect()->action("Admin\ProductsController@all");
     }
     
+    public function detail(Request $request){
+        if(!empty($request->id)){
+            $id = $request->id;
+            $products = items::where('id',$id)
+                    ->get();
+
+            $product =json_decode(json_encode($products), true);
+
+            $category = Categories::pluck('category_name','id');
+            $subcategory = SubCategories::pluck('subcategory_name','id');
+
+            $evaluation = items::where('products.id',$id)
+                    ->join('reviews','products.id','=','reviews.product_id')
+                    ->avg('reviews.evaluation');
+
+            $reviews = reviews::where('product_id',$id)
+                    ->select('reviews.id as id','reviews.member_id as member_id','users.nickname as member_name','reviews.evaluation as evaluation','reviews.comment as comment')
+                    ->join('users','reviews.member_id','=','users.id')
+                    ->orderBy('reviews.id', 'desc')
+                    ->paginate(3);
+
+            return view("admin.products.detail",compact(
+                'product','category','subcategory','evaluation','reviews'
+            ));
+
+        }else{
+            return view("admin.products.detail");
+        }
+    }
+
+    public function delete_confirm(Request $request)
+    {
+        //
+    }
+
+  public function destroy(Request $request)
+    {
+        if($request->products_id){
+            $product = items::find($request->products_id)->delete();
+            
+            return redirect()->action("Admin\ProductsController@all");
+        }
+        
+    }
 
 }
